@@ -1,0 +1,46 @@
+#级数1:计算1+2+3+…+n的和 输出运算结果 n<=100 可初始化
+
+	BYTE	ans = 0
+        
+	LOADI	A	0
+	LOADI	B	0
+	LOADI	C	10
+	JMP	in	
+
+getn:	SUBI	B	48
+	MUL	A	A	C
+	ADD	A	B	A
+in:	IN	B	0
+	EQU	B	C
+	NOTC	
+	CJMP	getn
+	
+	LOADI	B	0
+	LOADI	D	0
+cal:	ADD	D	D	B
+	ADDI	B	1
+	LTE	B	A	
+	CJMP	cal
+	
+	LOADI	G	0
+trans:	DIV	E	D	C
+	MUL	F	E	C
+	SUB	F	D	F
+	ADD	D	E	Z
+
+	ADDI	F	48
+	PUSH	F
+	ADDI	G	1
+	
+	LT	Z	D			
+	CJMP	trans
+	
+output:	POP	F
+	OUT	F	15
+	SUBI	G	1
+	LT	Z	G
+	CJMP	output
+	
+	HLT
+	
+	
