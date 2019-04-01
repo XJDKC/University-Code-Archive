@@ -1,0 +1,44 @@
+#进制转换1:输入一个十进制整数n 转化为十六进制(不带前缀)后输出 0<=n<=32767
+
+	BYTE	ans = 0
+        
+	LOADI	A	0
+	LOADI	B	0
+	LOADI	C	10
+	JMP	in	
+
+getn:	SUBI	B	48
+	MUL	A	A	C
+	ADD	A	B	A
+in:	IN	B	0
+	EQU	B	C
+	NOTC	
+	CJMP	getn
+	
+	LOADI	B	0
+	LOADI	C	16
+        LOADI   F	10
+	LOADI	G	0
+trans:	DIV	D	A	C
+	MUL	E	D	C
+	SUB	E	A	E
+	ADD	A	D	Z
+
+	LT	E	F
+	CJMP	shuzi
+	SUBI	E	10
+	ADDI	E	97
+	JMP	push
+shuzi:	ADDI	E	48
+push:	PUSH	E
+	ADDI	B	1
+	LT	Z	A
+	CJMP	trans
+
+output:	POP	E
+	OUT	E	15
+	SUBI	B	1
+	LT	Z	B
+	CJMP	output
+	
+	HLT
