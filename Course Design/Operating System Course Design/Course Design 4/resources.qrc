@@ -1,0 +1,12 @@
+<RCC>
+    <qresource prefix="/">
+        <file>images/arrow-down.png</file>
+        <file>images/arrow-up.png</file>
+        <file>main.cpp</file>
+        <file>mainwindow.cpp</file>
+        <file>mainwindow.h</file>
+        <file>images/arrow-down-1.png</file>
+        <file>images/arrow-up-1.png</file>
+        <file>images/ubuntu.png</file>
+    </qresource>
+</RCC>
