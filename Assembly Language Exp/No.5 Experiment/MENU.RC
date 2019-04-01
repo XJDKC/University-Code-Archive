@@ -1,0 +1,18 @@
+500	MENUEX MOVEABLE IMPURE LOADONCALL DISCARDABLE
+BEGIN
+	POPUP "&File", , , 0
+	BEGIN
+		MENUITEM "&Exit", 510
+	END
+
+	POPUP "&Action", , , 0
+	BEGIN
+		MENUITEM "&Average", 520
+		MENUITEM "&List", 521
+	END
+
+	POPUP "&Help", , , 0
+	BEGIN
+		MENUITEM "&About", 530
+	END
+END

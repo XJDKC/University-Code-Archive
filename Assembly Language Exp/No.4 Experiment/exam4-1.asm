@@ -1,0 +1,134 @@
+.386
+STACK SEGMENT USE16 STACK
+	DB 200 DUP(0)
+STACK ENDS
+;------------------------
+DATA SEGMENT USE16
+	BUF DB 15 DUP('0')
+DATA ENDS
+;------------------------
+CODE SEGMENT USE16
+	ASSUME CS:CODE,DS:DATA,SS:STACK
+OUT_INFO MACRO A
+	MOV DL,A
+	MOV AH,2
+	INT 21H
+ENDM
+START:
+	MOV AX,DATA
+	MOV DS,AX
+	
+	; MOV AL,1H
+	; MOV AH,35H
+	; INT 21H
+	MOV AX,0
+	MOV ES,AX
+	MOV BX,ES:[1H*4]
+	MOV ES,ES:[1H*4+2]
+	PUSH BX
+	PUSH ES
+	CALL PRINT_NUM
+	OUT_INFO ' '
+	CALL PRINT_NUM
+	
+	OUT_INFO 10
+	
+	MOV AL,10H
+	MOV AH,35H
+	INT 21H
+	
+	MOV AX,0
+	MOV ES,AX
+	MOV BX,ES:[10H*4]
+	MOV ES,ES:[10H*4+2]
+	PUSH BX
+	PUSH ES
+	CALL PRINT_NUM
+	OUT_INFO ' '
+	CALL PRINT_NUM
+	
+	MOV AH,4CH
+	INT 21H
+	
+;功能：讲AX中的有符号二进制数以十进制形式在显示器上输出
+;入口参数：AX - 存放待转换的有符号二进制数
+;出口参数：转换后的带符号十进制数载显示器上输出
+;所用寄存器: EBX--用来存放基数10
+;	        SI---用来作10进制数ASCLL码存储区的指针
+;调用子程序: RADIX
+PRINT_NUM PROC
+	PUSH BP
+	MOV BP,SP
+	PUSH EAX
+	PUSH EBX
+	PUSH DX
+	PUSH SI 					;保存现场
+	LEA SI, BUF
+	MOVSX EAX,WORD PTR [BP+4]
+
+	MOV EBX, 16
+	CALL RADIX
+	MOV BYTE PTR[SI+4], '$'
+	LEA DX, BUF
+	MOV AH, 9
+	INT 21H
+	POP SI
+	POP DX
+	POP EBX
+	POP EAX
+	POP BP
+	RET 2
+PRINT_NUM ENDP
+
+;功能：将EAX中的32位无符号二进制数转换为10进制
+;入口参数：
+;		 EAX -- 存放带转换的32位无符号二进制数
+;		 EBX -- 存放要转换进制的基数
+;		 SI -- 存放转换后的P进制ASCII码数字串的字节缓冲区首址
+;出口参数:
+;		所求10进制ASCII码数字串按高位在前、低位在后的顺序存放在以SI为指针的字节缓冲区中
+;		SI--指向字节缓冲区最后一个ASCII码的下一个字节处
+;所使用寄存器:
+;CX--P进制数字入栈、出栈时的计数器
+;EDX--做除法时存放被除数高位或余数
+RADIX PROC
+	PUSH BP
+	PUSH DI
+	PUSH CX
+	PUSH EDX
+	XOR CX, CX 			;计数器清零
+	LOP1:
+		XOR EDX, EDX
+		DIV EBX
+		PUSH DX
+		INC CX
+		OR EAX, EAX
+		JNZ LOP1		;EAX!=0, 转LOP1继续循环
+	MOV BP,CX
+	NEG BP
+	;INC BP
+	MOV CX,4
+	MOV DI,SI
+	LOP3:
+		MOV BYTE PTR [DI],30H
+		INC DI
+		LOOP LOP3
+	LOP2:
+		POP AX
+		CMP AL, 9
+		JA ADD_65
+		ADD AL, 30H
+		JMP NEXT
+ADD_65:	ADD AL, 55
+NEXT:	MOV DS:[BP+SI+4], AL
+		INC BP
+		CMP BP,0
+	JNE LOP2
+	POP EDX
+	POP CX
+	POP DI
+	POP BP
+	RET
+RADIX ENDP
+CODE ENDS
+	END START
