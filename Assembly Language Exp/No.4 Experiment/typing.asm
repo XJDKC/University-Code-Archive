@@ -1,0 +1,35 @@
+.386
+STACK SEGMENT USE16 STACK
+	DB 200 DUP(0)
+STACK ENDS
+;------------------------
+DATA SEGMENT USE16
+MSG DB 'Magic! You are never ever typing uppercase letters! ( ^_^ )',10,'$'
+DATA ENDS
+;------------------------
+CODE SEGMENT USE16
+	ASSUME CS:CODE,DS:DATA,SS:STACK
+START:
+	MOV AX,DATA
+	MOV DS,AX
+	
+	LEA DX,MSG
+	MOV AH,9
+	INT 21H
+LOOP1:
+	MOV AH,0
+	INT 16H
+	CMP AH,01H ;ESC
+	JZ EXIT
+	MOV DL,AL
+	MOV AH,02H
+	INT 21H
+	JMP LOOP1
+
+EXIT:
+	MOV AH,4CH
+	INT 21H
+CODE ENDS
+	END START
+	
+	

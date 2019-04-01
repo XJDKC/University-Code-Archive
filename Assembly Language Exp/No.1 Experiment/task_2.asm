@@ -1,0 +1,40 @@
+.386
+STACK	SEGMENT	USE16	STACK			;堆栈段声明
+	db	200	DUP(0)						;为堆栈段开辟200个字节的空间 并赋值为0
+STACK	ENDS							;堆栈段声明结束
+DATA	SEGMENT	USE16					;数据段声明
+BUF1	DB	0,1,2,3,4,5,6,7,8,9			;声明一个数据存储区BUF1 初值分别为0H,1H,2H,3H,4H,5H,6H,7H,8H,9H
+BUF2	DB	10	DUP(0)					;声明一个数据存储区BUF2 初值全部赋值成0
+BUF3	DB	10	DUP(0)					;声明一个数据存储区BUF3 初值全部赋值成0
+BUF4	DB	10	DUP(0)					;声明一个数据存储区BUF4 初值全部赋值成0
+MENTION DB 'Press any key to begin! $'
+DATA	ENDS							;数据段声明结束
+CODE	SEGMENT USE16					;代码段声明
+	ASSUME	CS:CODE,DS:DATA,SS:STACK	;假定
+START:	MOV	AX,DATA
+	MOV	DS,AX
+	MOV	SI,OFFSET BUF1
+	MOV	DI,OFFSET BUF2
+	MOV	BX,OFFSET BUF3
+	MOV	BP,OFFSET BUF4
+	MOV	CX,10
+	MOV AH,9
+	INT 21H
+	MOV AH,1
+	INT 21H
+LOPA:	MOV	AL,[SI]
+	MOV	[DI],AL
+	INC	AL
+	MOV	[BX],AL
+	ADD	AL,3
+	MOV	DS:[BP],AL
+	INC	SI
+	INC	DI
+	INC	BP
+	INC	BX
+	DEC	CX
+	JNZ	LOPA
+	MOV	AH,4CH
+	INT	21H
+CODE	ENDS
+	END	START

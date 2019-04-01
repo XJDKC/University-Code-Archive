@@ -1,0 +1,39 @@
+.386
+;----------------------------
+STACK	SEGMENT STACK use16
+	DB	200 DUP(0)
+STACK	ENDS
+;----------------------------
+DATA	SEGMENT use16
+MSG	DB	'How are you! $'
+DATA	ENDS
+;------------------------------
+CODE SEGMENT use16
+        ASSUME CS:CODE,DS:DATA,SS:STACK
+BEGIN:	MOV  AX, DATA
+		MOV  DS, AX
+		MOV	AH,0110011B
+		MOV	AL,1011010B
+		ADD	AH,AL
+		MOV	AH,0110011B
+		MOV	AL,1011010B
+		SUB	AH,AL	
+
+		MOV	AH,-0101001B
+		MOV	AL,-1011101B
+		ADD	AH,AL
+		MOV	AH,-0101001B
+		MOV	AL,-1011101B
+		SUB	AH,AL
+
+		MOV	AH,1100101B
+		MOV	AL,-1011101B
+		ADD	AH,AL
+		MOV	AH,1100101B
+		MOV	AL,-1011101B
+		SUB	AH,AL
+		MOV  AH,4CH   ;exit
+		INT  21H
+;-----------------------------
+CODE	ENDS
+	END BEGIN
