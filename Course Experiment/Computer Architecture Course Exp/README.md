@@ -108,18 +108,27 @@
 1. 运行test-csim测试实验一，获得实验一分数，共八个样例，除最后一个样例6分其他均3分
 
    > linux> ./csim -s 1 -E 1 -b 1 -t traces/yi2.trace
+   >
    > linux> ./csim -s 4 -E 2 -b 4 -t traces/yi.trace
+   >
    > linux> ./csim -s 2 -E 1 -b 4 -t traces/dave.trace
+   >
    > linux> ./csim -s 2 -E 1 -b 3 -t traces/trans.trace
+   >
    > linux> ./csim -s 2 -E 2 -b 3 -t traces/trans.trace
+   >
    > linux> ./csim -s 2 -E 4 -b 3 -t traces/trans.trace
+   >
    > linux> ./csim -s 5 -E 1 -b 5 -t traces/trans.trace
+   >
    > linux> ./csim -s 5 -E 1 -b 5 -t traces/long.trace
 
 2. 运行test-trans测试实验二，获得实验二分数，共三个样例
 
    > 32×32：如果m<300得8分，如果m>600得0分，对其他m得(600-m)\*8/300分。
+   >
    > 64×64：如果m<1300得8分，如果m>2000得0分，对其他m得(2000-m)\*8/700分。
+   >
    > 61×67：如果m<2000得10分，如果m>3000得0分，对其他m得(3000-m)\*10/1000分。
 
 3. 计算两个实验得分得到总分，共53分
