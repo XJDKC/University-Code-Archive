@@ -76,4 +76,17 @@ public class SceneController {
             e.printStackTrace();
         }
     }
+
+    public void close(){
+        try{
+            primaryStage.close();
+        }
+        catch (NullPointerException e){
+            e.printStackTrace();
+        }
+    }
+
+    public void changeScene(String sceneID){
+        primaryStage.setScene(scenes.get(sceneID));
+    }
 }

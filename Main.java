@@ -1,5 +1,6 @@
 import Controller.SceneController;
 import Controller.ViewController;
+import DataBase.DBConnection;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -18,6 +19,8 @@ public class Main extends Application {
         sceneController = new SceneController();
         sceneController.setPrimaryStage(primaryStage);
         sceneController.setScenes();
+
+        DBConnection.getDBConnection();
 
         primaryStage.setTitle("Registration Management System");
         primaryStage.setScene(sceneController.getScene(0));
