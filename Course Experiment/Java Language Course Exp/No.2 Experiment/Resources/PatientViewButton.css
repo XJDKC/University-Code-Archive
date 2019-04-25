@@ -1,0 +1,54 @@
+#btRegister {
+    -fx-background-color: #4CAF50;
+    -fx-text-fill: white;
+    -fx-border-radius: 5px;
+    -webkit-transition-duration: 0.4s;
+}
+
+#btRegister:hover {
+    -fx-background-color: white; /* Green */
+    -fx-text-fill: black;
+    -fx-border-color: #4CAF50;
+    -fx-border-width: 2px;
+    -fx-border-radius: 4px;
+}
+
+#btRegister:pressed {
+    -fx-background-color: #e7e7e7;
+}
+
+#btCancel {
+    -fx-background-color: #4CAF50;
+    -fx-text-fill: white;
+    -fx-border-radius: 5px;
+}
+
+#btCancel:hover {
+    -fx-background-color: white; /* Green */
+    -fx-text-fill: black;
+    -fx-border-color: #4CAF50;
+    -fx-border-width: 2px;
+    -fx-border-radius: 4px;
+}
+
+#btCancel:pressed {
+    -fx-background-color: #e7e7e7;
+}
+
+#btLogout {
+    -fx-background-color: #4CAF50;
+    -fx-text-fill: white;
+    -fx-border-radius: 5px;
+}
+
+#btLogout:hover {
+    -fx-background-color: white; /* Green */
+    -fx-text-fill: black;
+    -fx-border-color: #4CAF50;
+    -fx-border-width: 2px;
+    -fx-border-radius: 4px;
+}
+
+#btLogout:pressed {
+    -fx-background-color: #e7e7e7;
+}
