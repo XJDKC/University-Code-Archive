@@ -1,0 +1,36 @@
+#btOK {
+    -fx-background-color: #4CAF50;
+    -fx-text-fill: white;
+    -fx-border-radius: 5px;
+    -webkit-transition-duration: 0.4s;
+}
+
+#btOK:hover {
+    -fx-background-color: white; /* Green */
+    -fx-text-fill: black;
+    -fx-border-color: #4CAF50;
+    -fx-border-width: 2px;
+    -fx-border-radius: 4px;
+}
+
+#btOK:pressed {
+    -fx-background-color: #e7e7e7;
+}
+
+#btQuit {
+    -fx-background-color: #4CAF50;
+    -fx-text-fill: white;
+    -fx-border-radius: 5px;
+}
+
+#btQuit:hover {
+    -fx-background-color: white; /* Green */
+    -fx-text-fill: black;
+    -fx-border-color: #4CAF50;
+    -fx-border-width: 2px;
+    -fx-border-radius: 4px;
+}
+
+#btQuit:pressed {
+    -fx-background-color: #e7e7e7;
+}

@@ -22,4 +22,6 @@ public abstract class ViewController implements Initializable {
     public void initialize(URL location, ResourceBundle resources)  {
 
     }
+
+    abstract public void clear();
 }
