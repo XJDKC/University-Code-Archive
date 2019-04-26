@@ -8,41 +8,50 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.LoginViewController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="Controller.LoginViewController">
     <children>
-      <VBox prefHeight="400.0" prefWidth="599.0">
-         <children>
-              <HBox alignment="BOTTOM_CENTER" prefHeight="107.0" prefWidth="599.0">
-                  <children>
-                      <Text fill="#4caf50" strokeType="OUTSIDE" strokeWidth="0.0" text="门 诊 挂 号" textAlignment="CENTER" wrappingWidth="598.9609375">
-                          <font>
-                              <Font name="FZHei-B01" size="30.0" />
-                          </font>
-                      </Text>
-                  </children>
-              </HBox>
-            <Pane prefHeight="164.0" prefWidth="599.0">
-               <children>
-                    <PasswordField fx:id="password" layoutX="179.0" layoutY="76.0" prefHeight="23.0" prefWidth="252.0" />
-                    <Label layoutX="133.0" layoutY="34.0" text="账号:" />
-                    <Label layoutX="129.0" layoutY="128.0" text="类别：" />
-                    <Label layoutX="129.0" layoutY="81.0" text="口令：" />
-                    <ComboBox fx:id="username" editable="true" layoutX="179.0" layoutY="29.0" onKeyPressed="#cbUsernameOnKeyPre" onMouseEntered="#cbUsernameOnMouseEnter" onMouseExited="#cbUsernameOnMouseExit" onMousePressed="#cbUsernameOnMousePress" prefHeight="23.0" prefWidth="252.0" />
-                  <RadioButton fx:id="rbtDoctor" layoutX="330.0" layoutY="128.0" mnemonicParsing="false" text="医生">
-                     <toggleGroup>
-                        <ToggleGroup fx:id="type" />
-                     </toggleGroup>
-                  </RadioButton>
-                  <RadioButton fx:id="rbtPatient" layoutX="231.0" layoutY="128.0" mnemonicParsing="false" selected="true" text="病人" toggleGroup="$type" />
-               </children>
-            </Pane>
-            <HBox alignment="CENTER" prefHeight="61.0" prefWidth="599.0" spacing="60.0">
-               <children>
-                    <Button fx:id="btOK" mnemonicParsing="false" onAction="#btOKOnAction" prefHeight="30.0" prefWidth="70.0" stylesheets="@../Resources/LoginView.css" text="确定" />
-                    <Button fx:id="btQuit" mnemonicParsing="false" onAction="#btQuitOnAction" prefHeight="30.0" prefWidth="70.0" stylesheets="@../Resources/LoginView.css" text="退出" />
-               </children>
-            </HBox>
-         </children>
-      </VBox>
+        <VBox prefHeight="400.0" prefWidth="599.0">
+            <children>
+                <HBox alignment="BOTTOM_CENTER" prefHeight="107.0" prefWidth="599.0">
+                    <children>
+                        <Text fill="#4caf50" strokeType="OUTSIDE" strokeWidth="0.0" text="门 诊 挂 号"
+                              textAlignment="CENTER" wrappingWidth="598.9609375">
+                            <font>
+                                <Font name="FZHei-B01" size="30.0"/>
+                            </font>
+                        </Text>
+                    </children>
+                </HBox>
+                <Pane prefHeight="164.0" prefWidth="599.0">
+                    <children>
+                        <Label layoutX="133.0" layoutY="34.0" text="账号:"/>
+                        <ComboBox fx:id="username" editable="true" layoutX="179.0" layoutY="29.0"
+                                  onKeyPressed="#cbUsernameOnKeyPre" onMouseEntered="#cbUsernameOnMouseEnter"
+                                  onMouseExited="#cbUsernameOnMouseExit" prefHeight="23.0" prefWidth="252.0"/>
+                        <Label layoutX="129.0" layoutY="81.0" text="口令："/>
+                        <PasswordField fx:id="password" layoutX="179.0" layoutY="76.0" prefHeight="23.0"
+                                       prefWidth="252.0"/>
+                        <Label layoutX="129.0" layoutY="128.0" text="类别："/>
+                        <RadioButton fx:id="rbtDoctor" layoutX="330.0" layoutY="128.0" mnemonicParsing="false"
+                                     onAction="#rbtDoctorOnAction" text="医生">
+                            <toggleGroup>
+                                <ToggleGroup fx:id="type"/>
+                            </toggleGroup>
+                        </RadioButton>
+                        <RadioButton fx:id="rbtPatient" layoutX="231.0" layoutY="128.0" mnemonicParsing="false"
+                                     onAction="#rbtPatientOnAction" selected="true" text="病人" toggleGroup="$type"/>
+                    </children>
+                </Pane>
+                <HBox alignment="CENTER" prefHeight="61.0" prefWidth="599.0" spacing="60.0">
+                    <children>
+                        <Button fx:id="btOK" mnemonicParsing="false" onAction="#btOKOnAction" prefHeight="30.0"
+                                prefWidth="70.0" stylesheets="@../Resources/LoginView.css" text="确定"/>
+                        <Button fx:id="btQuit" mnemonicParsing="false" onAction="#btQuitOnAction" prefHeight="30.0"
+                                prefWidth="70.0" stylesheets="@../Resources/LoginView.css" text="退出"/>
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
     </children>
 </AnchorPane>

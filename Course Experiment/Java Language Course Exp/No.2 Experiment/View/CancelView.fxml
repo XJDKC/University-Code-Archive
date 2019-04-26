@@ -15,10 +15,23 @@
             <children>
                 <MenuBar>
                     <menus>
-                        <Menu mnemonicParsing="false" text="主界面" />
-                        <Menu mnemonicParsing="false" text="门诊挂号" />
-                        <Menu mnemonicParsing="false" text="门诊退号" />
-                        <Menu mnemonicParsing="false" text="退出登录" />
+                        <Menu mnemonicParsing="false" text="窗口">
+                            <items>
+                                <MenuItem mnemonicParsing="false" onAction="#miMainInterfaceOnAction" text="回到主界面"/>
+                                <MenuItem mnemonicParsing="false" onAction="#miLogoutOnAction" text="退出登录"/>
+                            </items>
+                        </Menu>
+                        <Menu mnemonicParsing="false" text="功能">
+                            <items>
+                                <MenuItem mnemonicParsing="false" onAction="#miRegisterOnAction" text="门诊挂号"/>
+                                <MenuItem mnemonicParsing="false" onAction="#miCancelOnAction" text="门诊退号"/>
+                            </items>
+                        </Menu>
+                        <Menu mnemonicParsing="false" text="帮助">
+                            <items>
+                                <MenuItem mnemonicParsing="false" onAction="#miAboutOnAction" text="About"/>
+                            </items>
+                        </Menu>
                     </menus>
                 </MenuBar>
             </children>

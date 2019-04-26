@@ -11,6 +11,7 @@ import java.util.HashMap;
 public class SceneController {
     private Stage primaryStage = null;
     private HashMap<String, Scene> scenes = new HashMap<>();
+    private HashMap<String, ViewController> controllers = new HashMap<>();
     private static final String[] viewID={"Login","Patient","Doctor","Register","Cancel","PatientList","Income"};
     private static final String[] viewResources={"/View/LoginView.fxml",
                                                  "/View/PatientView.fxml",
@@ -51,6 +52,28 @@ public class SceneController {
             return null;
     }
 
+    public void addViewController(String sceneID, ViewController viewController) {
+        controllers.put(sceneID,viewController);
+    }
+
+    public void removeViewController(String sceneID) {
+        controllers.remove(sceneID);
+    }
+
+    public ViewController getViewController(String sceneID) {
+        ViewController viewController = controllers.get(sceneID);
+        if (viewController == null)
+            System.out.println("No corresponding ViewController");
+        return viewController;
+    }
+
+    public ViewController getViewController(int index) {
+        if ( 0 <= index && index < viewID.length)
+            return controllers.get(viewID[index]);
+        else
+            return null;
+    }
+
     public void setScenes(){
         try {
             FXMLLoader loader;
@@ -64,6 +87,8 @@ public class SceneController {
                 addScene(viewID[i],scene);
 
                 viewController = loader.getController();
+                addViewController(viewID[i],viewController);
+
                 viewController.setSceneController(this);
             }
         }
@@ -86,7 +111,9 @@ public class SceneController {
         }
     }
 
-    public void changeScene(String sceneID){
+    public void changeScene(String sceneID,boolean refresh){
+        if (refresh)
+            controllers.get(sceneID).clear();
         primaryStage.setScene(scenes.get(sceneID));
     }
 }

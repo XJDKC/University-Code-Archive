@@ -8,26 +8,30 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.PatientViewController">
-   <children>
-      <VBox alignment="CENTER" prefHeight="400.0" prefWidth="600.0" spacing="25.0">
-         <children>
-            <Button id="btRegister" mnemonicParsing="false" onAction="#btRegisterOnAction" prefHeight="60.0" prefWidth="200.0" stylesheets="@../Resources/PatientView.css" text="门 诊 挂 号">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Button>
-            <Button id="btCancel" mnemonicParsing="false" onAction="#btCancelOnAction" prefHeight="60.0" prefWidth="200.0" stylesheets="@../Resources/PatientView.css" text="门 诊 退 号">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Button>
-            <Button id="btLogout" mnemonicParsing="false" onAction="#btLogoutOnAction" prefHeight="60.0" prefWidth="200.0" stylesheets="@../Resources/PatientView.css" text="退 出 登 录">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Button>
-         </children>
-      </VBox>
-   </children>
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="Controller.PatientViewController">
+    <children>
+        <VBox alignment="CENTER" prefHeight="400.0" prefWidth="600.0" spacing="25.0">
+            <children>
+                <Button id="btRegister" mnemonicParsing="false" onAction="#btRegisterOnAction" prefHeight="60.0"
+                        prefWidth="200.0" stylesheets="@../Resources/PatientView.css" text="门 诊 挂 号">
+                    <font>
+                        <Font size="24.0"/>
+                    </font>
+                </Button>
+                <Button id="btCancel" mnemonicParsing="false" onAction="#btCancelOnAction" prefHeight="60.0"
+                        prefWidth="200.0" stylesheets="@../Resources/PatientView.css" text="门 诊 退 号">
+                    <font>
+                        <Font size="24.0"/>
+                    </font>
+                </Button>
+                <Button id="btLogout" mnemonicParsing="false" onAction="#btLogoutOnAction" prefHeight="60.0"
+                        prefWidth="200.0" stylesheets="@../Resources/PatientView.css" text="退 出 登 录">
+                    <font>
+                        <Font size="24.0"/>
+                    </font>
+                </Button>
+            </children>
+        </VBox>
+    </children>
 </AnchorPane>

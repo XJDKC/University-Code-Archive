@@ -8,113 +8,137 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.RegisterViewController">
+<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="Controller.RegisterViewController">
     <children>
         <VBox prefHeight="400.0" prefWidth="600.0">
             <children>
                 <MenuBar>
                     <menus>
-                        <Menu mnemonicParsing="false" text="主界面" />
-                        <Menu mnemonicParsing="false" text="门诊挂号" />
-                        <Menu mnemonicParsing="false" text="门诊退号" />
-                        <Menu mnemonicParsing="false" text="退出登录" />
+                        <Menu mnemonicParsing="false" text="窗口">
+                            <items>
+                                <MenuItem mnemonicParsing="false" onAction="#miMainInterfaceOnAction" text="回到主界面"/>
+                                <MenuItem mnemonicParsing="false" onAction="#miLogoutOnAction" text="退出登录"/>
+                            </items>
+                        </Menu>
+                        <Menu mnemonicParsing="false" text="功能">
+                            <items>
+                                <MenuItem mnemonicParsing="false" onAction="#miRegisterOnAction" text="门诊挂号"/>
+                                <MenuItem mnemonicParsing="false" onAction="#miCancelOnAction" text="门诊退号"/>
+                            </items>
+                        </Menu>
+                        <Menu mnemonicParsing="false" text="帮助">
+                            <items>
+                                <MenuItem mnemonicParsing="false" onAction="#miAboutOnAction" text="About"/>
+                            </items>
+                        </Menu>
                     </menus>
                 </MenuBar>
-            <HBox alignment="CENTER" prefHeight="109.0">
-               <children>
-                  <Text fill="#4caf50" strokeType="OUTSIDE" strokeWidth="0.0" text="门 诊 挂 号" textAlignment="CENTER" wrappingWidth="144.9609375">
-                     <font>
-                        <Font name="FZHei-B01" size="30.0" />
-                     </font>
-                  </Text>
-               </children>
-            </HBox>
-            <GridPane vgap="15.0">
-              <columnConstraints>
-                <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="50.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="120.0" />
-                  <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="50.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="120.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
-               <children>
-                  <TextField prefWidth="10.0" GridPane.columnIndex="1" />
-                  <TextField prefWidth="10.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <TextField prefWidth="10.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <TextField prefWidth="10.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                  <TextField prefWidth="10.0" GridPane.columnIndex="3" />
-                  <TextField prefWidth="10.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                  <TextField prefWidth="10.0" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-                  <TextField prefHeight="27.0" prefWidth="10.0" GridPane.columnIndex="3" GridPane.rowIndex="3" />
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="科室名称 ">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </Text>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="号种类别 " GridPane.rowIndex="1">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </Text>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="交款金额 " GridPane.rowIndex="2">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </Text>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="找零金额 " GridPane.rowIndex="3">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </Text>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="医生姓名 " GridPane.columnIndex="2">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </Text>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="号种名称 " GridPane.columnIndex="2" GridPane.rowIndex="1">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </Text>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="应缴金额 " GridPane.columnIndex="2" GridPane.rowIndex="2">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </Text>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="挂号号码 " GridPane.columnIndex="2" GridPane.rowIndex="3">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </Text>
-               </children>
-               <VBox.margin>
-                  <Insets left="40.0" right="50.0" />
-               </VBox.margin>
-            </GridPane>
-            <HBox alignment="CENTER" prefHeight="100.0" spacing="50.0">
-               <children>
-                  <Button id="btOK" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="26.0" prefWidth="60.0" stylesheets="@../Resources/RegisterView.css" text="确 定" textAlignment="CENTER">
-                     <font>
-                        <Font name="FZHei-B01" size="14.0" />
-                     </font>
-                  </Button>
-                  <Button id="btClear" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="26.0" prefWidth="60.0" stylesheets="@../Resources/RegisterView.css" text="清 除" textAlignment="CENTER">
-                     <font>
-                        <Font name="FZHei-B01" size="14.0" />
-                     </font>
-                  </Button>
-                  <Button id="btQuit" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="26.0" prefWidth="60.0" stylesheets="@../Resources/RegisterView.css" text="退 出" textAlignment="CENTER">
-                     <font>
-                        <Font name="FZHei-B01" size="14.0" />
-                     </font>
-                  </Button>
-               </children>
-            </HBox>
+                <HBox alignment="CENTER" prefHeight="109.0">
+                    <children>
+                        <Text fill="#4caf50" strokeType="OUTSIDE" strokeWidth="0.0" text="门 诊 挂 号"
+                              textAlignment="CENTER" wrappingWidth="144.9609375">
+                            <font>
+                                <Font name="FZHei-B01" size="30.0"/>
+                            </font>
+                        </Text>
+                    </children>
+                </HBox>
+                <GridPane vgap="15.0">
+                    <columnConstraints>
+                        <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="50.0"/>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="120.0"/>
+                        <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="50.0"/>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="120.0"/>
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                    </rowConstraints>
+                    <children>
+                        <TextField fx:id="tfDeptName" prefWidth="10.0" GridPane.columnIndex="1"/>
+                        <TextField prefWidth="10.0" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                        <TextField prefWidth="10.0" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+                        <TextField prefWidth="10.0" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+                        <TextField fx:id="tfDoctorName" prefWidth="10.0" GridPane.columnIndex="3"/>
+                        <TextField prefWidth="10.0" GridPane.columnIndex="3" GridPane.rowIndex="1"/>
+                        <TextField prefWidth="10.0" GridPane.columnIndex="3" GridPane.rowIndex="2"/>
+                        <TextField prefHeight="27.0" prefWidth="10.0" GridPane.columnIndex="3" GridPane.rowIndex="3"/>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="科室名称 ">
+                            <font>
+                                <Font size="16.0"/>
+                            </font>
+                        </Text>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="号种类别 " GridPane.rowIndex="1">
+                            <font>
+                                <Font size="16.0"/>
+                            </font>
+                        </Text>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="交款金额 " GridPane.rowIndex="2">
+                            <font>
+                                <Font size="16.0"/>
+                            </font>
+                        </Text>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="找零金额 " GridPane.rowIndex="3">
+                            <font>
+                                <Font size="16.0"/>
+                            </font>
+                        </Text>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="医生姓名 " GridPane.columnIndex="2">
+                            <font>
+                                <Font size="16.0"/>
+                            </font>
+                        </Text>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="号种名称 " GridPane.columnIndex="2"
+                              GridPane.rowIndex="1">
+                            <font>
+                                <Font size="16.0"/>
+                            </font>
+                        </Text>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="应缴金额 " GridPane.columnIndex="2"
+                              GridPane.rowIndex="2">
+                            <font>
+                                <Font size="16.0"/>
+                            </font>
+                        </Text>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="挂号号码 " GridPane.columnIndex="2"
+                              GridPane.rowIndex="3">
+                            <font>
+                                <Font size="16.0"/>
+                            </font>
+                        </Text>
+                    </children>
+                    <VBox.margin>
+                        <Insets left="40.0" right="50.0"/>
+                    </VBox.margin>
+                </GridPane>
+                <HBox alignment="CENTER" prefHeight="100.0" spacing="50.0">
+                    <children>
+                        <Button id="btOK" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="26.0"
+                                prefWidth="60.0" stylesheets="@../Resources/RegisterView.css" text="确 定"
+                                textAlignment="CENTER">
+                            <font>
+                                <Font name="FZHei-B01" size="14.0"/>
+                            </font>
+                        </Button>
+                        <Button id="btClear" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="26.0"
+                                prefWidth="60.0" stylesheets="@../Resources/RegisterView.css" text="清 除"
+                                textAlignment="CENTER">
+                            <font>
+                                <Font name="FZHei-B01" size="14.0"/>
+                            </font>
+                        </Button>
+                        <Button id="btQuit" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="26.0"
+                                prefWidth="60.0" stylesheets="@../Resources/RegisterView.css" text="退 出"
+                                textAlignment="CENTER">
+                            <font>
+                                <Font name="FZHei-B01" size="14.0"/>
+                            </font>
+                        </Button>
+                    </children>
+                </HBox>
             </children>
         </VBox>
     </children>
