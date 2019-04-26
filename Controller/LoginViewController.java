@@ -5,6 +5,9 @@ import DataBase.DoctorTableAccess;
 import DataBase.PatientTableAccess;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableStringValue;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -24,39 +27,44 @@ import java.util.ResourceBundle;
 
 
 public class LoginViewController extends ViewController {
-    @FXML private ComboBox username;
-    @FXML private PasswordField password;
-    @FXML private RadioButton rbtPatient;
-    @FXML private RadioButton rbtDoctor;
-    @FXML private Button btOK;
-    @FXML private Button btQuit;
+    @FXML
+    private ComboBox username;
+    @FXML
+    private PasswordField password;
+    @FXML
+    private RadioButton rbtPatient;
+    @FXML
+    private RadioButton rbtDoctor;
+    @FXML
+    private Button btOK;
+    @FXML
+    private Button btQuit;
 
     @FXML
-    public void btOKOnAction(ActionEvent e){
-        String name = (String)username.getValue();
+    public void btOKOnAction(ActionEvent e) {
+        String name = (String) username.getValue();
         String pwd = password.getText();
 
-        if (name == null || pwd == null){
-            AlertController.showInfomation("Login","Please complete the info");
+        if (name == null || pwd == null) {
+            AlertController.showInfomation("Login", "Please complete the info");
         }
 
         if (rbtDoctor.isSelected()) {
             try {
                 if (DoctorTableAccess.doctorLogin(name, pwd)) {
                     AlertController.showInfomation("Login", "登陆成功!");
-                    sceneController.changeScene("Doctor");
+                    sceneController.changeScene("Doctor", true);
                 } else {
                     AlertController.showInfomation("Login", "登录失败,请输入正确的用户名和密码!");
                 }
             } catch (ClassNotFoundException | SQLException e1) {
                 e1.printStackTrace();
             }
-        }
-        else if (rbtPatient.isSelected()) {
+        } else if (rbtPatient.isSelected()) {
             try {
                 if (PatientTableAccess.patientLogin(name, pwd)) {
                     AlertController.showInfomation("Login", "登陆成功!");
-                    sceneController.changeScene("Patient");
+                    sceneController.changeScene("Patient", true);
                 } else {
                     AlertController.showInfomation("Login", "登录失败,请输入正确的用户名和密码!");
                 }
@@ -67,71 +75,98 @@ public class LoginViewController extends ViewController {
     }
 
     @FXML
-    public void btQuitOnAction(ActionEvent e){
+    public void btQuitOnAction(ActionEvent e) {
         sceneController.close();
     }
 
     @FXML
-    public void cbUsernameOnKeyPre(KeyEvent e){
+    public void cbUsernameOnKeyPre(KeyEvent e) {
         //username.show();
     }
 
-    @FXML void cbUsernameOnMouseEnter(MouseEvent e){
+    @FXML
+    public void cbUsernameOnMouseEnter(MouseEvent e) {
         //username.show();
     }
 
-    @FXML void cbUsernameOnMouseExit(MouseEvent e){
+    @FXML
+    public void cbUsernameOnMouseExit(MouseEvent e) {
         //username.hide();
     }
 
     @FXML
-    void cbUsernameOnMousePress(MouseEvent e){
+    public void cbUsernameOnMousePress(MouseEvent e) {
 
     }
 
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-
-        this.username.getEditor().textProperty().addListener(new InvalidationListener() {
-            private String last = null;
-            @Override
-            public void invalidated(Observable observable) {
-                String filter = username.getEditor().getText();
-                ArrayList<String> usernames = null;
-
-                if (filter.isEmpty() || filter == null)
-                    username.hide();
-                else if (last == null || !filter.equals(last)){
-                    try {
-                        if (rbtPatient.isSelected()){
-                            usernames = PatientTableAccess.getPatientNames(filter);
-                        }
-                        else if (rbtDoctor.isSelected()){
-                            usernames = DoctorTableAccess.getDoctorNames(filter);
-                        }
-                        else
-                            usernames = new ArrayList<>();
-                    }catch (ClassNotFoundException | SQLException ex) {
-                        ex.printStackTrace();
-                    }
-
-                    username.getItems().setAll(usernames);
-
-                    System.out.println(usernames.size());
-
-                    username.show();
-
-                    last = filter;
-                }
-            }
-        });
+    @FXML
+    public void rbtDoctorOnAction(ActionEvent e) {
+        try {
+            username.getItems().setAll(DoctorTableAccess.getDoctorNames(""));
+        } catch (ClassNotFoundException | SQLException ex) {
+            ex.printStackTrace();
+        }
     }
 
+    @FXML
+    public void rbtPatientOnAction(ActionEvent e) {
+        try {
+            username.getItems().setAll(PatientTableAccess.getPatientNames(""));
+        } catch (ClassNotFoundException | SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    @FXML
+
+
     @Override
-    public void clear(){
+    public void clear() {
         username.getEditor().clear();
         username.getItems().clear();
         password.clear();
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        this.username.getEditor().textProperty().addListener(new UsernameTextInvalidateListener());
+        try {
+            username.getItems().setAll(PatientTableAccess.getPatientNames(""));
+        } catch (ClassNotFoundException | SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    class UsernameTextInvalidateListener implements InvalidationListener {
+
+        private String oldValue=null;
+
+        @Override
+        public void invalidated(Observable observable) {
+            String newValue = username.getEditor().getText();
+            ArrayList<String> usernames = null;
+
+            System.out.println(oldValue+" "+newValue);
+
+
+            if (newValue == null || newValue.isEmpty()) {
+                //username.getItems().setAll(PatientTableAccess.getPatientNames(""));
+                username.hide();
+            } else if (oldValue == null || !newValue.equals(oldValue)) {
+                try {
+                    if (rbtPatient.isSelected())
+                        usernames = PatientTableAccess.getPatientNames(newValue.trim());
+                    else if (rbtDoctor.isSelected())
+                        usernames = DoctorTableAccess.getDoctorNames(newValue.trim());
+                    else
+                        usernames = new ArrayList<>();
+                } catch (ClassNotFoundException | SQLException ex) {
+                    ex.printStackTrace();
+                }
+                username.getItems().setAll(usernames);
+                username.show();
+                oldValue = newValue;
+            }
+        }
     }
 }

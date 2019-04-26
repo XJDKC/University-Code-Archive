@@ -9,37 +9,54 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.IncomeViewController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="Controller.IncomeViewController">
     <children>
         <VBox prefHeight="400.0" prefWidth="600.0">
             <children>
                 <MenuBar>
                     <menus>
-                        <Menu mnemonicParsing="false" text="主界面" />
-                        <Menu mnemonicParsing="false" text="病人列表" />
-                        <Menu mnemonicParsing="false" text="收入列表" />
-                        <Menu mnemonicParsing="false" text="退出登录" />
+                        <Menu mnemonicParsing="false" text="窗口">
+                            <items>
+                                <MenuItem mnemonicParsing="false" onAction="#miMainInterfaceOnAction" text="回到主界面"/>
+                                <MenuItem mnemonicParsing="false" onAction="#miLogoutOnAction" text="退出登录"/>
+                            </items>
+                        </Menu>
+                        <Menu mnemonicParsing="false" text="功能">
+                            <items>
+                                <MenuItem mnemonicParsing="false" onAction="#miPatientListOnAction" text="病人列表"/>
+                                <MenuItem mnemonicParsing="false" onAction="#miIncomeListOnAction" text="收入列表"/>
+                                <MenuItem mnemonicParsing="false" onAction="#miRefreshOnAction" text="刷新"/>
+                            </items>
+                        </Menu>
+                        <Menu mnemonicParsing="false" text="帮助">
+                            <items>
+                                <MenuItem mnemonicParsing="false" onAction="#miAboutOnAction" text="About"/>
+                            </items>
+                        </Menu>
                     </menus>
                 </MenuBar>
                 <HBox alignment="CENTER" prefHeight="50.0" prefWidth="600.0">
                     <children>
-                        <Text fill="#4caf50" strokeType="OUTSIDE" strokeWidth="0.0" text="收 入 列 表" textAlignment="CENTER" wrappingWidth="144.9609375">
+                        <Text fill="#4caf50" strokeType="OUTSIDE" strokeWidth="0.0" text="收 入 列 表"
+                              textAlignment="CENTER" wrappingWidth="144.9609375">
                             <font>
-                                <Font name="FZHei-B01" size="30.0" />
+                                <Font name="FZHei-B01" size="30.0"/>
                             </font>
                         </Text>
                     </children>
                 </HBox>
                 <StackPane prefHeight="280.0" prefWidth="600.0">
                     <children>
-                        <TableView focusTraversable="false" prefHeight="280.0" prefWidth="588.0" style="-fx-background-color: none;">
+                        <TableView focusTraversable="false" prefHeight="280.0" prefWidth="588.0"
+                                   style="-fx-background-color: none;">
                             <columns>
-                                <TableColumn prefWidth="100.0" resizable="false" text="科室名称" />
-                                <TableColumn prefWidth="100.0" text="医生编号" />
-                                <TableColumn prefWidth="100.0" resizable="false" text="医生名称" />
-                                <TableColumn prefWidth="100.0" text="号种类别" />
-                        <TableColumn prefWidth="100.0" text="挂号人次" />
-                        <TableColumn prefWidth="100.0" text="收入合计" />
+                                <TableColumn prefWidth="100.0" resizable="false" text="科室名称"/>
+                                <TableColumn prefWidth="100.0" text="医生编号"/>
+                                <TableColumn prefWidth="100.0" resizable="false" text="医生名称"/>
+                                <TableColumn prefWidth="100.0" text="号种类别"/>
+                                <TableColumn prefWidth="100.0" text="挂号人次"/>
+                                <TableColumn prefWidth="100.0" text="收入合计"/>
                             </columns>
                         </TableView>
                     </children>

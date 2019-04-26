@@ -15,17 +15,17 @@ public class PatientViewController extends ViewController {
 
     @FXML
     public void btRegisterOnAction(ActionEvent e){
-        sceneController.changeScene("Register");
+        sceneController.changeScene("Register",true);
     }
 
     @FXML
     public void btCancelOnAction(ActionEvent e){
-        sceneController.changeScene("Cancel");
+        sceneController.changeScene("Cancel",true);
     }
 
     @FXML
     public void btLogoutOnAction(ActionEvent e){
-        sceneController.changeScene("Login");
+        sceneController.changeScene("Login",true);
     }
 
     @Override

@@ -39,7 +39,7 @@ public class DoctorTableAccess {
 
         Connection conn = DBConnection.getDBConnection().getConnection();
         PreparedStatement stm = conn.prepareStatement(SQL);
-        stm.setObject(1, "'%"+filter+"%'");
+        stm.setObject(1, "%"+filter+"%");
         ResultSet rst = stm.executeQuery();
 
         while (rst.next()){
