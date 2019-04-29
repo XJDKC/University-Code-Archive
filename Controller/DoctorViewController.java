@@ -29,7 +29,7 @@ public class DoctorViewController extends ViewController {
     }
 
     @Override
-    public void clear(){
+    public void reset(){
 
     }
 }

@@ -94,10 +94,9 @@ public class LoginViewController extends ViewController {
         //username.hide();
     }
 
-    @FXML
-    public void cbUsernameOnMousePress(MouseEvent e) {
 
-    }
+
+
 
     @FXML
     public void rbtDoctorOnAction(ActionEvent e) {
@@ -121,15 +120,10 @@ public class LoginViewController extends ViewController {
 
 
     @Override
-    public void clear() {
+    public void reset() {
         username.getEditor().clear();
         username.getItems().clear();
         password.clear();
-    }
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        this.username.getEditor().textProperty().addListener(new UsernameTextInvalidateListener());
         try {
             username.getItems().setAll(PatientTableAccess.getPatientNames(""));
         } catch (ClassNotFoundException | SQLException ex) {
@@ -137,7 +131,12 @@ public class LoginViewController extends ViewController {
         }
     }
 
-    class UsernameTextInvalidateListener implements InvalidationListener {
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        username.getEditor().textProperty().addListener(new UsernameTextListener());
+    }
+
+    class UsernameTextListener implements InvalidationListener {
 
         private String oldValue=null;
 

@@ -35,7 +35,7 @@ public class IncomeViewController extends ViewController {
     }
 
     @Override
-    public void clear(){
+    public void reset(){
 
     }
 }

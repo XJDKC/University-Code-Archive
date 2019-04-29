@@ -113,7 +113,7 @@ public class SceneController {
 
     public void changeScene(String sceneID,boolean refresh){
         if (refresh)
-            controllers.get(sceneID).clear();
+            controllers.get(sceneID).reset();
         primaryStage.setScene(scenes.get(sceneID));
     }
 }
