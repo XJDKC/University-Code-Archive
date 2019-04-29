@@ -23,5 +23,5 @@ public abstract class ViewController implements Initializable {
 
     }
 
-    abstract public void clear();
+    abstract public void reset();
 }

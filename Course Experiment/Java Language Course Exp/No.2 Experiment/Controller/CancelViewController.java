@@ -31,7 +31,7 @@ public class CancelViewController extends ViewController {
     }
 
     @Override
-    public void clear(){
+    public void reset(){
 
     }
 }

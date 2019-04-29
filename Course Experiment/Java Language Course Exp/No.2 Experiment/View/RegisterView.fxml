@@ -58,14 +58,17 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
                     </rowConstraints>
                     <children>
-                        <TextField fx:id="tfDeptName" prefWidth="10.0" GridPane.columnIndex="1"/>
-                        <TextField prefWidth="10.0" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
-                        <TextField prefWidth="10.0" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
-                        <TextField prefWidth="10.0" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
-                        <TextField fx:id="tfDoctorName" prefWidth="10.0" GridPane.columnIndex="3"/>
-                        <TextField prefWidth="10.0" GridPane.columnIndex="3" GridPane.rowIndex="1"/>
-                        <TextField prefWidth="10.0" GridPane.columnIndex="3" GridPane.rowIndex="2"/>
-                        <TextField prefHeight="27.0" prefWidth="10.0" GridPane.columnIndex="3" GridPane.rowIndex="3"/>
+                        <ComboBox fx:id="cboDeptName" editable="true" GridPane.columnIndex="1"/>
+                        <ComboBox fx:id="cboDoctorName" editable="true" GridPane.columnIndex="3"/>
+                        <ComboBox fx:id="cboIsExpert" onAction="#cboIsExpertOnAction" prefWidth="163.0"
+                                  GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                        <ComboBox fx:id="cboTypeName" editable="true" GridPane.columnIndex="3" GridPane.rowIndex="1"/>
+                        <TextField fx:id="tfPaymentAmout" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+                        <TextField fx:id="tfAmountDue" editable="false" GridPane.columnIndex="3" GridPane.rowIndex="2"/>
+                        <TextField fx:id="tfChangeAmout" editable="false" GridPane.columnIndex="1"
+                                   GridPane.rowIndex="3"/>
+                        <TextField fx:id="tfRegisterNo" editable="false" GridPane.columnIndex="3"
+                                   GridPane.rowIndex="3"/>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="科室名称 ">
                             <font>
                                 <Font size="16.0"/>
@@ -116,23 +119,23 @@
                 </GridPane>
                 <HBox alignment="CENTER" prefHeight="100.0" spacing="50.0">
                     <children>
-                        <Button id="btOK" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="26.0"
-                                prefWidth="60.0" stylesheets="@../Resources/RegisterView.css" text="确 定"
-                                textAlignment="CENTER">
+                        <Button fx:id="btOK" contentDisplay="CENTER" mnemonicParsing="false" onAction="#btOKOnAction"
+                                prefHeight="26.0" prefWidth="60.0" stylesheets="@../Resources/RegisterView.css"
+                                text="确 定" textAlignment="CENTER">
                             <font>
                                 <Font name="FZHei-B01" size="14.0"/>
                             </font>
                         </Button>
-                        <Button id="btClear" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="26.0"
-                                prefWidth="60.0" stylesheets="@../Resources/RegisterView.css" text="清 除"
-                                textAlignment="CENTER">
+                        <Button fx:id="btClear" contentDisplay="CENTER" mnemonicParsing="false"
+                                onAction="#btClearOnAction" prefHeight="26.0" prefWidth="60.0"
+                                stylesheets="@../Resources/RegisterView.css" text="清 除" textAlignment="CENTER">
                             <font>
                                 <Font name="FZHei-B01" size="14.0"/>
                             </font>
                         </Button>
-                        <Button id="btQuit" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="26.0"
-                                prefWidth="60.0" stylesheets="@../Resources/RegisterView.css" text="退 出"
-                                textAlignment="CENTER">
+                        <Button fx:id="btQuit" contentDisplay="CENTER" mnemonicParsing="false"
+                                onAction="#btQuitOnAction" prefHeight="26.0" prefWidth="60.0"
+                                stylesheets="@../Resources/RegisterView.css" text="退 出" textAlignment="CENTER">
                             <font>
                                 <Font name="FZHei-B01" size="14.0"/>
                             </font>

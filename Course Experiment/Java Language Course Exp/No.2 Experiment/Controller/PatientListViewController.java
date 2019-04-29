@@ -36,7 +36,7 @@ public class PatientListViewController extends ViewController {
     }
 
     @Override
-    public void clear(){
+    public void reset(){
 
     }
 }
