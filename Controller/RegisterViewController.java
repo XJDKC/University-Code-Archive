@@ -1,19 +1,15 @@
 package Controller;
 
-import DataBase.DeptTableAcess;
-import DataBase.DoctorTableAccess;
-import DataBase.PatientTableAccess;
-import DataBase.RegTypeTableAccess;
+import DataBase.*;
 import javafx.application.Platform;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 
+import java.math.BigDecimal;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -25,9 +21,9 @@ public class RegisterViewController extends ViewController{
     @FXML private ComboBox cboDoctorName;
     @FXML private ComboBox cboIsExpert;
     @FXML private ComboBox cboTypeName;
-    @FXML private TextField tfPaymentAmout;
+    @FXML private TextField tfPaymentAmount;
     @FXML private TextField tfAmountDue;
-    @FXML private TextField tfChangeAmout;
+    @FXML private TextField tfChangeAmount;
     @FXML private TextField tfRegisterNo;
 
     private String deptName = "";
@@ -75,12 +71,43 @@ public class RegisterViewController extends ViewController{
                 ex.printStackTrace();
             }
         }
+        updateAmountDue();
     }
 
 
     @FXML
     public void btOKOnAction(ActionEvent e) {
+        double amountDue = 0;
+        double paymentAmount = 0;
+        double accountBalance = 0;
+        String patientName = AccountController.getAccountName();
+        String amountDueStr = tfAmountDue.getText();
 
+        amountDueStr = amountDueStr.substring(0,amountDueStr.indexOf(' '));
+        amountDue = Double.parseDouble(amountDueStr);
+        if (amountDue > 0) {
+            if (!tfPaymentAmount.getText().isEmpty())
+                paymentAmount = Double.parseDouble(tfPaymentAmount.getText());
+
+            try {
+                accountBalance = PatientTableAccess.getBalance(patientName);
+            }catch (ClassNotFoundException | SQLException ex) {
+                ex.printStackTrace();
+            }
+
+
+            System.out.println(accountBalance+" "+paymentAmount+" "+amountDue);
+            if (accountBalance + paymentAmount < amountDue){
+                AlertController.showInfomation("Error","账户余额不足");
+                return;
+            }
+
+            try {
+                RegisterTableAccess.register(patientName,doctorName,typeName,isExpert.equals("专家号"),amountDue);
+            }catch (ClassNotFoundException | SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
     }
 
     @FXML
@@ -96,17 +123,17 @@ public class RegisterViewController extends ViewController{
 
     @Override
     public void reset(){
-        cboDeptName.getEditor().clear();
-        cboDoctorName.getEditor().clear();
+        cboDeptName.getEditor().setText("");
+        cboDoctorName.getEditor().setText("");
+        cboTypeName.getEditor().setText("");
+        cboDeptName.getSelectionModel().clearSelection();
+        cboDoctorName.getSelectionModel().clearSelection();
         cboIsExpert.getSelectionModel().clearSelection();
-        cboTypeName.getEditor().clear();
-        cboDeptName.getItems().clear();
-        cboDoctorName.getItems().clear();
-        cboTypeName.getItems().clear();
-        tfPaymentAmout.clear();
-        tfAmountDue.clear();
-        tfChangeAmout.clear();
-        tfRegisterNo.clear();
+        cboTypeName.getSelectionModel().clearSelection();
+        tfPaymentAmount.setText("");
+        tfChangeAmount.setText("");
+        tfRegisterNo.setText("");
+        tfAmountDue.setText("0.00 ￥");
         try {
             cboDeptName.getItems().setAll(DeptTableAcess.getDeptNames(""));
             cboDoctorName.getItems().setAll(DoctorTableAccess.getDoctorNames(""));
@@ -121,7 +148,8 @@ public class RegisterViewController extends ViewController{
         cboDeptName.getEditor().textProperty().addListener(new DeptNameTextListener());
         cboDoctorName.getEditor().textProperty().addListener(new DoctorNameTextListener());
         cboTypeName.getEditor().textProperty().addListener(new TypeNameTextListener());
-        cboIsExpert.getItems().addAll("普通号","专家号");
+        cboIsExpert.getItems().setAll("普通号","专家号");
+        tfAmountDue.setText("0.00 ￥");
     }
 
     class DeptNameTextListener implements InvalidationListener {
@@ -160,13 +188,15 @@ public class RegisterViewController extends ViewController{
             Platform.runLater(() -> comboboxUpdate(cboTypeName,typeName,oldValue,3) );
 
             oldValue = typeName;
+
+            updateAmountDue();
         }
     }
 
     private void comboboxUpdate(ComboBox comboBox,String newValue,String oldValue,int type) {
         ArrayList<String> newList = null;
 
-        System.out.println(comboBox.getEditor().getText()+" " + oldValue + " " + newValue + " " + deptName + " " + doctorName + " " + typeName + comboBox.getItems().size());
+        //System.out.println(comboBox.getEditor().getText()+" " + oldValue + " " + newValue + " " + deptName + " " + doctorName + " " + typeName + comboBox.getItems().size());
 
         if (newValue.isEmpty())
             comboBox.hide();
@@ -183,6 +213,20 @@ public class RegisterViewController extends ViewController{
             }
             comboBox.getItems().setAll(newList);
             comboBox.show();
+        }
+    }
+
+    private void updateAmountDue(){
+        BigDecimal cost = BigDecimal.ZERO;
+        try {
+            if (!isExpert.isEmpty())
+                cost = RegTypeTableAccess.getCost(typeName,isExpert.equals("专家号"));
+        } catch (ClassNotFoundException | SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        if (cost.doubleValue() > 0){
+            this.tfAmountDue.setText(String.format("%.2f ￥",cost.doubleValue()));
         }
     }
 }

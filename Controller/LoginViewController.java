@@ -1,26 +1,16 @@
 package Controller;
 
-import DataBase.DBConnection;
 import DataBase.DoctorTableAccess;
 import DataBase.PatientTableAccess;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableStringValue;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.stage.Window;
 
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -54,6 +44,8 @@ public class LoginViewController extends ViewController {
                 if (DoctorTableAccess.doctorLogin(name, pwd)) {
                     AlertController.showInfomation("Login", "登陆成功!");
                     sceneController.changeScene("Doctor", true);
+                    AccountController.setAccountName(username.getEditor().getText());
+                    AccountController.setAccountType(true);
                 } else {
                     AlertController.showInfomation("Login", "登录失败,请输入正确的用户名和密码!");
                 }
@@ -65,6 +57,8 @@ public class LoginViewController extends ViewController {
                 if (PatientTableAccess.patientLogin(name, pwd)) {
                     AlertController.showInfomation("Login", "登陆成功!");
                     sceneController.changeScene("Patient", true);
+                    AccountController.setAccountName(username.getEditor().getText());
+                    AccountController.setAccountType(true);
                 } else {
                     AlertController.showInfomation("Login", "登录失败,请输入正确的用户名和密码!");
                 }

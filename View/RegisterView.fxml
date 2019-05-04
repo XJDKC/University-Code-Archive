@@ -63,9 +63,10 @@
                         <ComboBox fx:id="cboIsExpert" onAction="#cboIsExpertOnAction" prefWidth="163.0"
                                   GridPane.columnIndex="1" GridPane.rowIndex="1"/>
                         <ComboBox fx:id="cboTypeName" editable="true" GridPane.columnIndex="3" GridPane.rowIndex="1"/>
-                        <TextField fx:id="tfPaymentAmout" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+                        <TextField fx:id="tfPaymentAmount" promptText="0.00 ￥" GridPane.columnIndex="1"
+                                   GridPane.rowIndex="2"/>
                         <TextField fx:id="tfAmountDue" editable="false" GridPane.columnIndex="3" GridPane.rowIndex="2"/>
-                        <TextField fx:id="tfChangeAmout" editable="false" GridPane.columnIndex="1"
+                        <TextField fx:id="tfChangeAmount" editable="false" GridPane.columnIndex="1"
                                    GridPane.rowIndex="3"/>
                         <TextField fx:id="tfRegisterNo" editable="false" GridPane.columnIndex="3"
                                    GridPane.rowIndex="3"/>
