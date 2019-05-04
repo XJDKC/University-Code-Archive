@@ -1,5 +1,7 @@
 package DataBase;
 
+
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,6 +17,19 @@ public class PatientTableAccess {
     //更新最后一次登录时间以及日期
 
     //根据
+
+    public static String getPatientNo(String patientName) throws SQLException, ClassNotFoundException {
+        String SQL = "SELECT patientNo FROM Patient WHERE patientName = ?";
+
+        Connection conn = DBConnection.getDBConnection().getConnection();
+        PreparedStatement stm = conn.prepareStatement(SQL);
+        stm.setObject(1, patientName);
+        ResultSet rst = stm.executeQuery();
+
+        if (rst.next())
+            return rst.getString(1);
+        return "";
+    }
 
     public static boolean patientLogin(String username,String password) throws SQLException, ClassNotFoundException {
 
@@ -57,5 +72,19 @@ public class PatientTableAccess {
         System.out.println(rtn.size());
 
         return rtn;
+    }
+
+    public static double getBalance(String patientName) throws SQLException, ClassNotFoundException {
+        String SQL = "SELECT balance FROM Patient WHERE patientName = ?";
+
+        Connection conn = DBConnection.getDBConnection().getConnection();
+        PreparedStatement stm = conn.prepareStatement(SQL);
+        stm.setObject(1,patientName);
+        ResultSet rst = stm.executeQuery();
+
+        if (rst.next())
+            return rst.getBigDecimal(1).doubleValue();
+        else
+            return 0;
     }
 }

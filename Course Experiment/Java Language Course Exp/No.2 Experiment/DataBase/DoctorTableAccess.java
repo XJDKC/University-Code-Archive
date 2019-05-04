@@ -10,6 +10,18 @@ public class DoctorTableAccess {
 
     //根据医生查询科室
 
+    public static String getDoctorNo(String doctorName) throws SQLException, ClassNotFoundException {
+        String SQL = "SELECT doctorNo FROM Doctor WHERE doctorName = ?";
+
+        Connection conn = DBConnection.getDBConnection().getConnection();
+        PreparedStatement stm = conn.prepareStatement(SQL);
+        stm.setObject(1, doctorName);
+        ResultSet rst = stm.executeQuery();
+
+        if (rst.next())
+            return rst.getString(1);
+        return "";
+    }
 
     public static boolean doctorLogin(String username, String password) throws SQLException, ClassNotFoundException {
 

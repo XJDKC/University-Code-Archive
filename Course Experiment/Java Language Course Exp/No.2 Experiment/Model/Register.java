@@ -7,7 +7,7 @@ public class Register {
     private String typeNo;
     private String doctorNo;
     private String patientNo;
-    private String currentNum;
+    private int currentNum;
     private boolean unregister;
     private double realCost;
     private Date rigisterDate;
@@ -15,7 +15,7 @@ public class Register {
 
     public Register() {}
 
-    public Register(String registerNo, String typeNo, String doctorNo, String patientNo, String currentNum, boolean unregister, double realCost, Date rigisterDate, Date treatDate) {
+    public Register(String registerNo, String typeNo, String doctorNo, String patientNo, int currentNum, boolean unregister, double realCost, Date rigisterDate, Date treatDate) {
         this.registerNo = registerNo;
         this.typeNo = typeNo;
         this.doctorNo = doctorNo;
@@ -59,11 +59,11 @@ public class Register {
         this.patientNo = patientNo;
     }
 
-    public String getCurrentNum() {
+    public int getCurrentNum() {
         return currentNum;
     }
 
-    public void setCurrentNum(String currentNum) {
+    public void setCurrentNum(int currentNum) {
         this.currentNum = currentNum;
     }
 
