@@ -20,7 +20,6 @@ public class Department {
 
     public void setDeptNo(String deptNo) {
         this.deptNo = deptNo;
-        String.format("%5d",1);
     }
 
     public String getDeptName() {

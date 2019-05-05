@@ -1,5 +1,6 @@
 package Model;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 public class Doctor {
@@ -9,12 +10,12 @@ public class Doctor {
     private String nameAbbr;
     private String password;
     private boolean isExpert;
-    private Date lastVisit;
+    private Timestamp lastVisit;
 
     public Doctor() {
     }
 
-    public Doctor(String doctorNo, String deptBelong, String doctorName, String nameAbbr, String password, boolean isExpert, Date lastVisit) {
+    public Doctor(String doctorNo, String deptBelong, String doctorName, String nameAbbr, String password, boolean isExpert, Timestamp lastVisit) {
         this.doctorNo = doctorNo;
         this.deptBelong = deptBelong;
         this.doctorName = doctorName;
@@ -72,11 +73,11 @@ public class Doctor {
         isExpert = expert;
     }
 
-    public Date getLastVisit() {
+    public Timestamp getLastVisit() {
         return lastVisit;
     }
 
-    public void setLastVisit(Date lastVisit) {
+    public void setLastVisit(Timestamp lastVisit) {
         this.lastVisit = lastVisit;
     }
 }

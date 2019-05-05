@@ -77,6 +77,7 @@ public class RegisterViewController extends ViewController{
 
     @FXML
     public void btOKOnAction(ActionEvent e) {
+        int registerNo = 0;
         double amountDue = 0;
         double paymentAmount = 0;
         double accountBalance = 0;
@@ -103,10 +104,21 @@ public class RegisterViewController extends ViewController{
             }
 
             try {
-                RegisterTableAccess.register(patientName,doctorName,typeName,isExpert.equals("专家号"),amountDue);
+                registerNo = RegisterTableAccess.register(patientName,doctorName,typeName,isExpert.equals("专家号"),amountDue);
             }catch (ClassNotFoundException | SQLException ex) {
                 ex.printStackTrace();
             }
+
+            if (registerNo > 0) {
+                if (accountBalance>=amountDue)
+                    tfChangeAmount.setText(String.format("%.2f ￥",paymentAmount));
+                else
+                    tfChangeAmount.setText(String.format("%.2f ￥",accountBalance+paymentAmount-amountDue));
+                tfRegisterNo.setText(String.valueOf(registerNo));
+
+            }
+            else
+                AlertController.showInfomation("Error","Fail to register, please try again!");
         }
     }
 
@@ -126,10 +138,11 @@ public class RegisterViewController extends ViewController{
         cboDeptName.getEditor().setText("");
         cboDoctorName.getEditor().setText("");
         cboTypeName.getEditor().setText("");
-        cboDeptName.getSelectionModel().clearSelection();
-        cboDoctorName.getSelectionModel().clearSelection();
+//        cboDeptName.getSelectionModel().clearSelection();
+//        cboDoctorName.getSelectionModel().clearSelection();
+//        cboIsExpert.getSelectionModel().clearSelection();
+//        cboTypeName.getSelectionModel().clearSelection();
         cboIsExpert.getSelectionModel().clearSelection();
-        cboTypeName.getSelectionModel().clearSelection();
         tfPaymentAmount.setText("");
         tfChangeAmount.setText("");
         tfRegisterNo.setText("");

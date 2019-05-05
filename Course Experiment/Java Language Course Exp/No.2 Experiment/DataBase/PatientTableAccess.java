@@ -87,4 +87,29 @@ public class PatientTableAccess {
         else
             return 0;
     }
+
+    public static double getBalanceByNo(String patientNo) throws SQLException, ClassNotFoundException {
+        String SQL = "SELECT balance FROM Patient WHERE patientNo = ?";
+
+        Connection conn = DBConnection.getDBConnection().getConnection();
+        PreparedStatement stm = conn.prepareStatement(SQL);
+        stm.setObject(1,patientNo);
+        ResultSet rst = stm.executeQuery();
+
+        if (rst.next())
+            return rst.getBigDecimal(1).doubleValue();
+        else
+            return 0;
+    }
+
+    public static void updateBalance(String patientNo,double amountDue) throws SQLException,ClassNotFoundException {
+        double currentBalance = PatientTableAccess.getBalanceByNo(patientNo);
+        String SQL = "UPDATE Patient SET balance=? where patientNo = ?";
+
+        Connection conn = DBConnection.getDBConnection().getConnection();
+        PreparedStatement stm = conn.prepareStatement(SQL);
+        stm.setObject(1,currentBalance>=amountDue?currentBalance-amountDue:0);
+        stm.setObject(2,patientNo);
+        stm.executeUpdate();
+    }
 }
