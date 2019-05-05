@@ -97,7 +97,7 @@ public class RegisterViewController extends ViewController{
             }
 
 
-            System.out.println(accountBalance+" "+paymentAmount+" "+amountDue);
+            //System.out.println(accountBalance+" "+paymentAmount+" "+amountDue);
             if (accountBalance + paymentAmount < amountDue){
                 AlertController.showInfomation("Error","账户余额不足");
                 return;

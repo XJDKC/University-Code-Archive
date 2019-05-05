@@ -65,7 +65,7 @@ public class RegTypeTableAccess {
         if (!isExpert.isEmpty())
             stm.setObject(7, isExpert.equals("专家号") ? true : false);
 
-        System.out.println(stm.toString());
+        //System.out.println(stm.toString());
 
         ResultSet rst = stm.executeQuery();
 
@@ -89,7 +89,7 @@ public class RegTypeTableAccess {
 
         ResultSet rst = stm.executeQuery();
 
-        System.out.println("BigDecimal" + stm.toString() + " " + rst.getRow() + " " + rst.next());
+        //System.out.println("BigDecimal" + stm.toString() + " " + rst.getRow() + " " + rst.next());
 
         rst.last();
 

@@ -58,7 +58,7 @@ public class DeptTableAcess {
             rtn.add(rst.getString(1));
         }
 
-        System.out.println(rtn.size());
+        //System.out.println(rtn.size());
 
         return rtn;
     }
