@@ -1,15 +1,13 @@
 package DataBase;
 
 
+import Model.IncomeList;
 import Model.Patient;
 import Model.PatientList;
 import Model.RegType;
 
 import java.math.BigDecimal;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 
 
@@ -116,6 +114,43 @@ public class RegisterTableAccess {
             data.setPatientName(rst.getString(2));
             data.setRegisterDate(rst.getTimestamp(3));
             data.setRegisterType(rst.getString(4));
+            rtn.add(data);
+        }
+
+        return rtn;
+    }
+
+    private String deptName;
+    private String doctorNo;
+    private String doctorName;
+    private String registerType;
+    private int registerNum;
+    private double totalIncome;
+
+    public static ArrayList<IncomeList> getIncomeList(Timestamp startTime,Timestamp endTime) throws SQLException,ClassNotFoundException {
+        ArrayList<IncomeList> rtn = new ArrayList<>();
+        String SQL = "SELECT deptName,Register.doctorNo,doctorName,RegType.isExpert,count(*),sum(realCost) " +
+                     "from Register join RegType on Register.typeNo = RegType.typeNo " +
+                     "join Doctor on Register.doctorNo = Doctor.doctorNo " +
+                     "join Department on Doctor.deptBelong = Department.deptNo " +
+                     "where unregister=0 and registerDate between ? and ? " +
+                     "group by deptName,Register.doctorNo,doctorName,RegType.isExpert";
+
+        Connection conn = DBConnection.getDBConnection().getConnection();
+        PreparedStatement stm = conn.prepareStatement(SQL);
+        stm.setObject(1,startTime);
+        stm.setObject(2,endTime);
+        ResultSet rst = stm.executeQuery();
+
+        while (rst.next()) {
+            IncomeList data = new IncomeList();
+            data.setDeptName(rst.getString(1));
+            data.setDoctorNo(rst.getString(2));
+            data.setDoctorName(rst.getString(3));
+            data.setRegisterType(rst.getBoolean(4)?"专家号":"普通号");
+            data.setRegisterNum(rst.getInt(5));
+            data.setTotalIncome(rst.getBigDecimal(6).doubleValue());
+
             rtn.add(data);
         }
 

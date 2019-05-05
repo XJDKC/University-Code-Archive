@@ -61,40 +61,40 @@
                 </StackPane>
             <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="600.0">
                <children>
-                  <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="300.0" spacing="10.0">
+                  <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="300.0" spacing="5.0">
                      <children>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="起始时间:">
                            <font>
-                              <Font size="16.0" />
+                              <Font size="14.0" />
                            </font>
                            <HBox.margin>
-                              <Insets left="10.0" />
+                              <Insets left="5.0" />
                            </HBox.margin>
                         </Text>
-                        <ComboBox fx:id="cboStartYear" prefWidth="80.0">
+                        <ComboBox fx:id="cboStartYear" onHidden="#cbStartYearOnHidden" prefWidth="80.0">
                            <HBox.margin>
                               <Insets />
                            </HBox.margin>
                         </ComboBox>
-                        <ComboBox fx:id="cboStartMonth" prefWidth="50.0" />
-                        <ComboBox fx:id="cboStartDay" prefWidth="50.0" />
+                        <ComboBox fx:id="cboStartMonth" onHidden="#cbStartMonthOnHidden" prefWidth="65.0" />
+                        <ComboBox fx:id="cboStartDay" onHidden="#cbStartDayOnHidden" prefWidth="65.0" />
                      </children>
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>
                   </HBox>
-                  <HBox alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="300.0" spacing="10.0">
+                  <HBox alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="300.0" spacing="5.0">
                      <children>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="截止时间:">
                            <font>
-                              <Font size="16.0" />
+                              <Font size="14.0" />
                            </font>
                         </Text>
-                        <ComboBox fx:id="cboEndYear" prefWidth="80.0" />
-                        <ComboBox fx:id="cboEndMonth" prefWidth="50.0" />
-                        <ComboBox fx:id="cboEndDay" prefWidth="50.0">
+                        <ComboBox fx:id="cboEndYear" onHidden="#cbEndYearOnHidden" prefWidth="80.0" />
+                        <ComboBox fx:id="cboEndMonth" onHidden="#cbEndMonthOnHidden" prefWidth="65.0" />
+                        <ComboBox fx:id="cboEndDay" onHidden="#cbEndDayOnHidden" prefWidth="65.0">
                            <HBox.margin>
-                              <Insets right="10.0" />
+                              <Insets right="5.0" />
                            </HBox.margin>
                         </ComboBox>
                      </children>
