@@ -18,7 +18,7 @@ public class RegisterTableAccess {
 
     //根据
 
-    public static void register(String patientName, String doctorName, String typeName, boolean isExpert, double amountDue) throws SQLException, ClassNotFoundException {
+    public static int register(String patientName, String doctorName, String typeName, boolean isExpert, double amountDue) throws SQLException, ClassNotFoundException {
 
         int maxNum, curNum;
         String SQL;
@@ -35,7 +35,7 @@ public class RegisterTableAccess {
         doctorNo = DoctorTableAccess.getDoctorNo(doctorName);
         typeNo = RegTypeTableAccess.getTypeNo(typeName, isExpert);
         maxNum = RegTypeTableAccess.getMaxNum(typeNo);
-        registerNo = String.valueOf(RegisterTableAccess.getTotalNum() + 1);
+        registerNo = String.format("%06d",RegisterTableAccess.getTotalNum() + 1);
 
         //Step 3: Get the current number of registrations named typeName.
         curNum = RegisterTableAccess.getCurrentNum(typeNo);
@@ -44,7 +44,7 @@ public class RegisterTableAccess {
         if (curNum >= maxNum) {
             conn.rollback();
             conn.setAutoCommit(true);
-            return ;
+            return 0;
         }
 
         //Step 5: Registering.
@@ -61,11 +61,12 @@ public class RegisterTableAccess {
         conn.commit();
 
         //Step 6: Update Patient Account Balance
+        PatientTableAccess.updateBalance(patientNo,amountDue);
 
         //Step 7: Enable auto commit.
         conn.setAutoCommit(true);
 
-        return ;
+        return Integer.parseInt(registerNo);
     }
 
     public static int getTotalNum() throws SQLException, ClassNotFoundException {
