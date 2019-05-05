@@ -1,5 +1,6 @@
 package Model;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 public class Register {
@@ -10,12 +11,12 @@ public class Register {
     private int currentNum;
     private boolean unregister;
     private double realCost;
-    private Date rigisterDate;
-    private Date treatDate;
+    private Timestamp rigisterDate;
+    private Timestamp treatDate;
 
     public Register() {}
 
-    public Register(String registerNo, String typeNo, String doctorNo, String patientNo, int currentNum, boolean unregister, double realCost, Date rigisterDate, Date treatDate) {
+    public Register(String registerNo, String typeNo, String doctorNo, String patientNo, int currentNum, boolean unregister, double realCost, Timestamp rigisterDate, Timestamp treatDate) {
         this.registerNo = registerNo;
         this.typeNo = typeNo;
         this.doctorNo = doctorNo;
@@ -83,21 +84,19 @@ public class Register {
         this.realCost = realCost;
     }
 
-    public Date getRigisterDate() {
+    public Timestamp getRigisterDate() {
         return rigisterDate;
     }
 
-    public void setRigisterDate(Date rigisterDate) {
+    public void setRigisterDate(Timestamp rigisterDate) {
         this.rigisterDate = rigisterDate;
     }
 
-    public Date getTreatDate() {
+    public Timestamp getTreatDate() {
         return treatDate;
     }
 
-    public void setTreatDate(Date treatDate) {
+    public void setTreatDate(Timestamp treatDate) {
         this.treatDate = treatDate;
     }
-
-
 }
