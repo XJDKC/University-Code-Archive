@@ -1,6 +1,8 @@
 package DataBase;
 
 
+import Model.Patient;
+import Model.PatientList;
 import Model.RegType;
 
 import java.math.BigDecimal;
@@ -8,6 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 
 public class RegisterTableAccess {
@@ -92,5 +95,30 @@ public class RegisterTableAccess {
         if (rst.next())
             return rst.getInt(1);
         return 0;
+    }
+
+    public static ArrayList<PatientList> getPatientList(String doctorName) throws SQLException,ClassNotFoundException {
+        ArrayList<PatientList> rtn = new ArrayList<>();
+        String doctorNo = DoctorTableAccess.getDoctorNo(doctorName);
+        String SQL = "SELECT registerNo,patientName,registerDate,typeName " +
+                     "FROM Register join RegType on Register.typeNo = RegType.typeNo " +
+                     "join Patient on Register.patientNo = Patient.patientNo " +
+                     "WHERE doctorNo = ? and unregister = 0";
+
+        Connection conn = DBConnection.getDBConnection().getConnection();
+        PreparedStatement stm = conn.prepareStatement(SQL);
+        stm.setObject(1,doctorNo);
+        ResultSet rst = stm.executeQuery();
+
+        while (rst.next()) {
+            PatientList data = new PatientList();
+            data.setRegisterNo(rst.getString(1));
+            data.setPatientName(rst.getString(2));
+            data.setRegisterDate(rst.getTimestamp(3));
+            data.setRegisterType(rst.getString(4));
+            rtn.add(data);
+        }
+
+        return rtn;
     }
 }
