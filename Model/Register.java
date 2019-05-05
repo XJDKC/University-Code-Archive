@@ -11,7 +11,7 @@ public class Register {
     private int currentNum;
     private boolean unregister;
     private double realCost;
-    private Timestamp rigisterDate;
+    private Timestamp registerDate;
     private Timestamp treatDate;
 
     public Register() {}
@@ -24,7 +24,7 @@ public class Register {
         this.currentNum = currentNum;
         this.unregister = unregister;
         this.realCost = realCost;
-        this.rigisterDate = rigisterDate;
+        this.registerDate = rigisterDate;
         this.treatDate = treatDate;
     }
 
@@ -84,12 +84,12 @@ public class Register {
         this.realCost = realCost;
     }
 
-    public Timestamp getRigisterDate() {
-        return rigisterDate;
+    public Timestamp getRegisterDate() {
+        return registerDate;
     }
 
-    public void setRigisterDate(Timestamp rigisterDate) {
-        this.rigisterDate = rigisterDate;
+    public void setRegisterDate(Timestamp registerDate) {
+        this.registerDate = registerDate;
     }
 
     public Timestamp getTreatDate() {
