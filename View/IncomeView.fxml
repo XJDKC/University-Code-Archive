@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
@@ -9,58 +10,97 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="Controller.IncomeViewController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.IncomeViewController">
     <children>
         <VBox prefHeight="400.0" prefWidth="600.0">
             <children>
-                <MenuBar>
+                <MenuBar prefHeight="30.0" prefWidth="600.0">
                     <menus>
                         <Menu mnemonicParsing="false" text="窗口">
                             <items>
-                                <MenuItem mnemonicParsing="false" onAction="#miMainInterfaceOnAction" text="回到主界面"/>
-                                <MenuItem mnemonicParsing="false" onAction="#miLogoutOnAction" text="退出登录"/>
+                                <MenuItem mnemonicParsing="false" onAction="#miMainInterfaceOnAction" text="回到主界面" />
+                                <MenuItem mnemonicParsing="false" onAction="#miLogoutOnAction" text="退出登录" />
                             </items>
                         </Menu>
                         <Menu mnemonicParsing="false" text="功能">
                             <items>
-                                <MenuItem mnemonicParsing="false" onAction="#miPatientListOnAction" text="病人列表"/>
-                                <MenuItem mnemonicParsing="false" onAction="#miIncomeListOnAction" text="收入列表"/>
-                                <MenuItem mnemonicParsing="false" onAction="#miRefreshOnAction" text="刷新"/>
+                                <MenuItem mnemonicParsing="false" onAction="#miPatientListOnAction" text="病人列表" />
+                                <MenuItem mnemonicParsing="false" onAction="#miIncomeListOnAction" text="收入列表" />
+                                <MenuItem mnemonicParsing="false" onAction="#miRefreshOnAction" text="刷新" />
                             </items>
                         </Menu>
                         <Menu mnemonicParsing="false" text="帮助">
                             <items>
-                                <MenuItem mnemonicParsing="false" onAction="#miAboutOnAction" text="About"/>
+                                <MenuItem mnemonicParsing="false" onAction="#miAboutOnAction" text="About" />
                             </items>
                         </Menu>
                     </menus>
                 </MenuBar>
                 <HBox alignment="CENTER" prefHeight="50.0" prefWidth="600.0">
                     <children>
-                        <Text fill="#4caf50" strokeType="OUTSIDE" strokeWidth="0.0" text="收 入 列 表"
-                              textAlignment="CENTER" wrappingWidth="144.9609375">
+                        <Text fill="#4caf50" strokeType="OUTSIDE" strokeWidth="0.0" text="收 入 列 表" textAlignment="CENTER" wrappingWidth="144.9609375">
                             <font>
-                                <Font name="FZHei-B01" size="30.0"/>
+                                <Font name="FZHei-B01" size="30.0" />
                             </font>
                         </Text>
                     </children>
                 </HBox>
                 <StackPane prefHeight="280.0" prefWidth="600.0">
                     <children>
-                        <TableView focusTraversable="false" prefHeight="280.0" prefWidth="588.0"
-                                   style="-fx-background-color: none;">
+                        <TableView fx:id="tbvIncome" focusTraversable="false" prefHeight="280.0" prefWidth="600.0" style="-fx-background-color: none;">
                             <columns>
-                                <TableColumn prefWidth="100.0" resizable="false" text="科室名称"/>
-                                <TableColumn prefWidth="100.0" text="医生编号"/>
-                                <TableColumn prefWidth="100.0" resizable="false" text="医生名称"/>
-                                <TableColumn prefWidth="100.0" text="号种类别"/>
-                                <TableColumn prefWidth="100.0" text="挂号人次"/>
-                                <TableColumn prefWidth="100.0" text="收入合计"/>
+                                <TableColumn fx:id="colDeptName" editable="false" prefWidth="100.0" resizable="false" text="科室名称" />
+                                <TableColumn fx:id="colDoctorNo" editable="false" prefWidth="100.0" text="医生编号" />
+                                <TableColumn fx:id="colDoctorName" editable="false" prefWidth="100.0" resizable="false" text="医生名称" />
+                                <TableColumn fx:id="colRegisterType" editable="false" prefWidth="100.0" text="号种类别" />
+                                <TableColumn fx:id="colRegisterNum" editable="false" prefWidth="100.0" text="挂号人次" />
+                                <TableColumn fx:id="colTotalIncome" editable="false" prefWidth="98.0" text="收入合计" />
                             </columns>
                         </TableView>
                     </children>
                 </StackPane>
+            <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="600.0">
+               <children>
+                  <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="300.0" spacing="10.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="起始时间:">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </Text>
+                        <ComboBox fx:id="cboStartYear" prefWidth="80.0">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </ComboBox>
+                        <ComboBox fx:id="cboStartMonth" prefWidth="50.0" />
+                        <ComboBox fx:id="cboStartDay" prefWidth="50.0" />
+                     </children>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </HBox>
+                  <HBox alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="300.0" spacing="10.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="截止时间:">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Text>
+                        <ComboBox fx:id="cboEndYear" prefWidth="80.0" />
+                        <ComboBox fx:id="cboEndMonth" prefWidth="50.0" />
+                        <ComboBox fx:id="cboEndDay" prefWidth="50.0">
+                           <HBox.margin>
+                              <Insets right="10.0" />
+                           </HBox.margin>
+                        </ComboBox>
+                     </children>
+                  </HBox>
+               </children>
+            </HBox>
             </children>
         </VBox>
     </children>
