@@ -120,13 +120,6 @@ public class RegisterTableAccess {
         return rtn;
     }
 
-    private String deptName;
-    private String doctorNo;
-    private String doctorName;
-    private String registerType;
-    private int registerNum;
-    private double totalIncome;
-
     public static ArrayList<IncomeList> getIncomeList(Timestamp startTime,Timestamp endTime) throws SQLException,ClassNotFoundException {
         ArrayList<IncomeList> rtn = new ArrayList<>();
         String SQL = "SELECT deptName,Register.doctorNo,doctorName,RegType.isExpert,count(*),sum(realCost) " +
@@ -141,6 +134,8 @@ public class RegisterTableAccess {
         stm.setObject(1,startTime);
         stm.setObject(2,endTime);
         ResultSet rst = stm.executeQuery();
+
+        System.out.println(stm.toString());
 
         while (rst.next()) {
             IncomeList data = new IncomeList();

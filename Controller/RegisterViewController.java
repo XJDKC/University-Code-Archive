@@ -148,7 +148,7 @@ public class RegisterViewController extends ViewController{
         tfRegisterNo.setText("");
         tfAmountDue.setText("0.00 ￥");
         try {
-            cboDeptName.getItems().setAll(DeptTableAcess.getDeptNames(""));
+            cboDeptName.getItems().setAll(DeptTableAccess.getDeptNames(""));
             cboDoctorName.getItems().setAll(DoctorTableAccess.getDoctorNames(""));
             cboTypeName.getItems().setAll(RegTypeTableAccess.getTypeNames(""));
         }catch (ClassNotFoundException | SQLException ex) {
@@ -216,7 +216,7 @@ public class RegisterViewController extends ViewController{
         else if (!newValue.equals((String)comboBox.getSelectionModel().getSelectedItem())){
             try {
                 switch (type){
-                    case 1:newList = DeptTableAcess.getDeptNames(deptName.trim(),doctorName.trim(),isExpert,typeName.trim());break;
+                    case 1:newList = DeptTableAccess.getDeptNames(deptName.trim(),doctorName.trim(),isExpert,typeName.trim());break;
                     case 2:newList = DoctorTableAccess.getDoctorNames(deptName.trim(),doctorName.trim(),isExpert,typeName.trim());break;
                     case 3:newList = RegTypeTableAccess.getTypeNames(deptName.trim(),doctorName.trim(),isExpert,typeName.trim());break;
                     default:break;

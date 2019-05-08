@@ -173,7 +173,7 @@ public class IncomeViewController extends ViewController {
             !cboStartMonth.getSelectionModel().isEmpty() &&
             !cboStartDay.getSelectionModel().isEmpty()) {
 
-            int year = ((Integer)cboStartDay.getValue()).intValue();
+            int year = ((Integer)cboStartYear.getValue()).intValue();
             int month = ((Integer)cboStartMonth.getValue()).intValue();
             int day = ((Integer)cboStartDay.getValue()).intValue();
             //startTime = Timestamp.valueOf(String.format("%04d-%02d-%02d 00:00:00.0",year,month,day));

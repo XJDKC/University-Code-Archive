@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class DeptTableAcess {
+public class DeptTableAccess {
 
     public static ArrayList<String> getDeptNames(String deptName) throws SQLException, ClassNotFoundException  {
         //医生姓名 会影响查询结果 医生有归属的科室
