@@ -13,8 +13,8 @@ public class DBConnection {
     private static DBConnection dbConnection;
 
     private DBConnection()throws ClassNotFoundException, SQLException {
-        //Class.forName("com.mysql.jdbc.Driver");
-        conn= DriverManager.getConnection("jdbc:mysql://localhost/JavaExp","root","xrl520");
+        //Class.forName("com.mysql.cj.jdbc.Driver");
+        conn= DriverManager.getConnection("jdbc:mysql://localhost/JavaExp?serverTimezone=GMT%2B8","root","xrl520");
     }
     public Connection getConnection(){
         return conn;
