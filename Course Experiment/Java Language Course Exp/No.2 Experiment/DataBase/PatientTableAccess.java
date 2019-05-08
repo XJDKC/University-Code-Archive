@@ -60,7 +60,7 @@ public class PatientTableAccess {
         PreparedStatement stm = conn.prepareStatement(SQL);
         stm.setObject(1, "%"+filter+"%");
 
-        System.out.println(stm.toString());
+        //System.out.println(stm.toString());
 
         ResultSet rst = stm.executeQuery();
         ArrayList<String> rtn = new ArrayList<>();
@@ -69,7 +69,7 @@ public class PatientTableAccess {
             rtn.add(rst.getString(1));
         }
 
-        System.out.println(rtn.size());
+        //System.out.println(rtn.size());
 
         return rtn;
     }

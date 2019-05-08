@@ -139,7 +139,7 @@ public class LoginViewController extends ViewController {
             String newValue = username.getEditor().getText();
             ArrayList<String> usernames = null;
 
-            System.out.println(oldValue+" "+newValue);
+            //System.out.println(oldValue+" "+newValue);
 
 
             if (newValue == null || newValue.isEmpty()) {
