@@ -1,2 +1,2 @@
 # University-Code-Archive
-A sort of code written during college
+A series of codes written during college
