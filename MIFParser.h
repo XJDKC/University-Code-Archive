@@ -6,7 +6,6 @@
 #define MIF_MIFPARSER_H
 
 #include <string>
-#include <list>
 
 #include "MIF.h"
 
@@ -27,8 +26,10 @@ public:
     void setMifFile(const MIFFile &mifFile);
 
     void parse();
-    MIFFile getVertextHull();
-    static void exportToMif(const MIFFile mifFile, const std::string filepath);
+    MIFFile *getVertextHull();
+    static void exportToMif(const MIFFile &mifFile, std::string filepath);
+    static void exportToDat(const MIFFile &datFile, std::string filepath);
+
 };
 
 #endif //MIF_MIFPARSER_H

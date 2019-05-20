@@ -8,7 +8,7 @@
 #endif //MIF_MIF_H
 
 #include <string>
-#include <list>
+#include <vector>
 
 struct POINT{
     double x;
@@ -18,11 +18,16 @@ struct POINT{
     POINT();
     POINT(double x, double y);
     POINT(double x, double y,double symbol);
+
+    bool operator<(const POINT &a) const;
 };
 
 struct MIFFile{
     std::string header;
-    std::list<POINT> points;
+    std::vector<POINT> points;
+
+    MIFFile();
+    MIFFile(MIFFile &mifFile);
 
     void clear();
     void addPoint(POINT &point);
