@@ -2,8 +2,8 @@ from PIL import Image
 import os
 import time
 
-mifFile = './Test.mif'
-imgFile = './draw.png'
+mifFile = './data/A.mif'
+imgFile = './A.png'
 f = open(mifFile,'r')
 img = Image.new("RGB",(1000,1100))
 for i in range(0,999):
