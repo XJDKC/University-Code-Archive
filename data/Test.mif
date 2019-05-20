@@ -1,49 +1,74 @@
-VERSION 300
-CHARSET "WindowsSimpChinese"
-DELIMITER ","
- CoordSys Earth Projection 1, 0 Bounds (116.30872687,39.8639844405) (116.45369213,39.9764515095)                                                                                                                                                                                                            
-COLUMNS 24
-    NAME char(128)
-    PYNAME char(128)
-    MAPID char(8)
-    KIND char(4)
-    ZIPCODE char(6)
-    TELEPHONE char(200)
-    ADMINCODE char(6)
-    DISPLAY_X char(12)
-    DISPLAY_Y char(12)
-    POI_ID char(13)
-    IMPORTANCE char(1)
-    VADMINCODE char(12)
-    CHAINCODE char(4)
-    PRIOR_AUTH char(6)
-    LINKID char(13)
-    SIDE char(1)
-    PID char(15)
-    TEL_TYPE char(200)
-    FOOD_TYPE char(50)
-    AIRPT_CODE char(3)
-    OPEN_24H char(1)
-    DATA_SRC char(1)
-    MESH_ID char(8)
-    ADDRESS char(254)
+Version   300
+Charset "WindowsSimpChinese"
+Delimiter ","
+Unique 24
+CoordSys Earth Projection 1, 0 Bounds (-180, 5.36441802979e-015) (180, 90)
+Columns 31
+  NAME Char(128)
+  PYNAME Char(128)
+  MAPID Char(8)
+  KIND Char(4)
+  ZIPCODE Char(6)
+  TELEPHONE Char(200)
+  ADMINCODE Char(6)
+  DISPLAY_X Char(12)
+  DISPLAY_Y Char(12)
+  POI_ID Char(13)
+  IMPORTANCE Char(1)
+  VADMINCODE Char(12)
+  CHAINCODE Char(4)
+  PRIOR_AUTH Char(6)
+  LINKID Char(13)
+  SIDE Char(1)
+  PID Char(15)
+  TEL_TYPE Char(200)
+  FOOD_TYPE Char(50)
+  AIRPT_CODE Char(3)
+  OPEN_24H Char(1)
+  DATA_SRC Char(1)
+  MESH_ID Char(8)
+  ADDRESS Char(254)
+  NAME_2 Char(128)
+  PYNAME_2 Char(128)
+  MAPID_2 Char(8)
+  ID Char(13)
+  KIND_2 Char(9)
+  SNODE_ID Char(13)
+  ENODE_ID Char(13)
 DATA
-POINT 116.356 39.8691
+POINT 116.399 39.8725
+    SYMBOL (35,0,12)
 POINT 116.418 39.8736
+    SYMBOL (35,0,12)
 POINT 116.432 39.8817
+    SYMBOL (35,0,12)
 POINT 116.436 39.8841
+    SYMBOL (35,0,12)
 POINT 116.444 39.89
-POINT 116.447 39.9055
-POINT 116.444 39.947
-POINT 116.442 39.9539
-POINT 116.44 39.9559
-POINT 116.433 39.9602
+    SYMBOL (35,0,12)
+POINT 116.44 39.9416
+    SYMBOL (35,0,12)
+POINT 116.439 39.9439
+    SYMBOL (35,0,12)
+POINT 116.423 39.9577
+    SYMBOL (35,0,12)
 POINT 116.403 39.9712
-POINT 116.384 39.9713
-POINT 116.379 39.9699
-POINT 116.366 39.9661
-POINT 116.341 39.9521
-POINT 116.336 39.9466
-POINT 116.315 39.8773
-POINT 116.316 39.875
-POINT 116.348 39.8699
+    SYMBOL (35,0,12)
+POINT 116.394 39.9618
+    SYMBOL (35,0,12)
+POINT 116.388 39.9536
+    SYMBOL (35,0,12)
+POINT 116.388 39.9494
+    SYMBOL (35,0,12)
+POINT 116.389 39.9154
+    SYMBOL (35,0,12)
+POINT 116.393 39.8878
+    SYMBOL (35,0,12)
+POINT 116.395 39.8784
+    SYMBOL (35,0,12)
+POINT 116.396 39.8769
+    SYMBOL (35,0,12)
+POINT 116.396 39.8764
+    SYMBOL (35,0,12)
+POINT 116.399 39.873
+    SYMBOL (35,0,12)
