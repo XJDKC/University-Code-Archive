@@ -1,5 +1,6 @@
 #include <iostream>
 
+#include <cmath>
 #include "MIFParser.h"
 
 using namespace std;
@@ -16,7 +17,11 @@ int main(int argc,char **argv) {
 
     mifParser.parse();
 
-    MIFParser::exportToMif(mifParser.getVertextHull(),argv[2]);
+    MIFFile *mifFile = mifParser.getVertextHull();
+
+    MIFParser::exportToMif(*mifFile,argv[2]);
+
+    MIFParser::exportToDat(*mifFile,argv[2]);
 
     return 0;
 }
