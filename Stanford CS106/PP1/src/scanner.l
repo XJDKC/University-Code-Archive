@@ -2,7 +2,7 @@
  * ----------------
  * Lex input file to generate the scanner for the compiler.
 */
-
+%option yylineno
 %{
 
 /* The text within this first region delimited by %{ and %} is assumed to
@@ -63,14 +63,14 @@ static void DoBeforeEachAction();
 
 integer		([0-9]+)
 integerHex	(0[xX][0-9a-fA-F]+)
-double		({integer}"."[0-9]+[eE][+-]?{integer})
+double		({integer}"."[0-9]*([eE][-+]?{integer})?)
 bool		(true|false)
 terString	(\"(\\.|[^\n"\\])*)
 string		({terString}\")
-commentLine	("//"[^\n]*)
-commentBegin    ("/*"([^\*]|(\*)*[^\*/])*(\*)*)
-comment		({commentBegin}"*/")
-operator	([+\-*/%<=!;,.\[\](){}])
+singleComment	("//"[^\n]*)
+commentBegin    ("/*"([^\*]|(\*)*[^\*/])*)
+comment		({commentBegin}(\*)*"*/")
+operator	([+\-*/%<>=!;,.\[\](){}])
 identifier	([a-zA-Z][_0-9a-zA-Z]*)
 
 
@@ -116,7 +116,7 @@ identifier	([a-zA-Z][_0-9a-zA-Z]*)
 		 	  return T_DoubleConstant; 	}
 
 {bool}			{ yylval.boolConstant = yytext[0] == 't';
-			  return T_Bool; 		}
+			  return T_BoolConstant; 		}
 
 {string}		{ yylval.stringConstant = strdup(yytext);
 		 	  return T_StringConstant; 	}
@@ -136,7 +136,7 @@ identifier	([a-zA-Z][_0-9a-zA-Z]*)
 
 
  /* Comment */
-{commentLine}		{ }
+{singleComment}		{ }
 {commentBegin}		{ ReportError::UntermComment(); }
 {comment}		{ }
 
@@ -144,10 +144,9 @@ identifier	([a-zA-Z][_0-9a-zA-Z]*)
  /* Identifier */
 {identifier}		{ if (strlen(yytext)>MaxIdentLen)
 			  	ReportError::LongIdentifier(&yylloc,yytext);
-			  else {
-			  	strncpy(yylval.identifier,yytext,MaxIdentLen);
-			  	return T_Identifier;
-			  }
+			  strncpy(yylval.identifier,yytext,MaxIdentLen);
+			  yylval.identifier[MaxIdentLen] = '\0';
+			  return T_Identifier;
 			}
 
  /* new line or tab */
@@ -200,7 +199,9 @@ void InitScanner()
  */
 static void DoBeforeEachAction()
 {
+    curLineNum = yylineno;
     yylloc.first_line = curLineNum;
     yylloc.first_column = curColNum;
     yylloc.last_column = curColNum + yyleng - 1;
+    curColNum += yyleng;
 }
