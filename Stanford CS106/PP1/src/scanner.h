@@ -11,7 +11,9 @@
 #include <stdio.h>
 
 #define MaxIdentLen 31    // Maximum length for identifiers
-
+/*
+ *
+ */
   
 /* Typedef: TokenType enum
  * -----------------------
@@ -47,7 +49,6 @@ static const char *gTokenNames[T_NumTokenTypes] = {
   "T_ReadInteger", "T_ReadLine"
 };
 
- 
 /* Typedef: YYSTYPE
  * ----------------
  * Defines the union type that is used by the scanner to store

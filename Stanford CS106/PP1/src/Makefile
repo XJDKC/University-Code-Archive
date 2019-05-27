@@ -79,39 +79,39 @@ clean:
 	rm -f $(JUNK) y.output $(PRODUCTS)
 
 # DO NOT DELETE
-
-errors.o: errors.h location.h /usr/include/stdio.h /usr/include/features.h
-errors.o: /usr/include/sys/cdefs.h /usr/include/bits/wordsize.h
-errors.o: /usr/include/gnu/stubs.h /usr/include/gnu/stubs-64.h
-errors.o: /usr/include/bits/types.h /usr/include/bits/typesizes.h
-errors.o: /usr/include/libio.h /usr/include/_G_config.h /usr/include/wchar.h
-errors.o: /usr/include/bits/wchar.h /usr/include/gconv.h
-errors.o: /usr/include/bits/stdio_lim.h /usr/include/bits/sys_errlist.h
-utility.o: utility.h /usr/include/stdlib.h /usr/include/features.h
-utility.o: /usr/include/sys/cdefs.h /usr/include/bits/wordsize.h
-utility.o: /usr/include/gnu/stubs.h /usr/include/gnu/stubs-64.h
-utility.o: /usr/include/sys/types.h /usr/include/bits/types.h
-utility.o: /usr/include/bits/typesizes.h /usr/include/time.h
-utility.o: /usr/include/endian.h /usr/include/bits/endian.h
-utility.o: /usr/include/sys/select.h /usr/include/bits/select.h
-utility.o: /usr/include/bits/sigset.h /usr/include/bits/time.h
-utility.o: /usr/include/sys/sysmacros.h /usr/include/bits/pthreadtypes.h
-utility.o: /usr/include/alloca.h /usr/include/stdio.h /usr/include/libio.h
-utility.o: /usr/include/_G_config.h /usr/include/wchar.h
-utility.o: /usr/include/bits/wchar.h /usr/include/gconv.h
-utility.o: /usr/include/bits/stdio_lim.h /usr/include/bits/sys_errlist.h
-utility.o: /usr/include/string.h
-main.o: /usr/include/string.h /usr/include/features.h
-main.o: /usr/include/sys/cdefs.h /usr/include/bits/wordsize.h
-main.o: /usr/include/gnu/stubs.h /usr/include/gnu/stubs-64.h
-main.o: /usr/include/stdio.h /usr/include/bits/types.h
-main.o: /usr/include/bits/typesizes.h /usr/include/libio.h
-main.o: /usr/include/_G_config.h /usr/include/wchar.h
-main.o: /usr/include/bits/wchar.h /usr/include/gconv.h
-main.o: /usr/include/bits/stdio_lim.h /usr/include/bits/sys_errlist.h
-main.o: utility.h /usr/include/stdlib.h /usr/include/sys/types.h
-main.o: /usr/include/time.h /usr/include/endian.h /usr/include/bits/endian.h
-main.o: /usr/include/sys/select.h /usr/include/bits/select.h
-main.o: /usr/include/bits/sigset.h /usr/include/bits/time.h
-main.o: /usr/include/sys/sysmacros.h /usr/include/bits/pthreadtypes.h
-main.o: /usr/include/alloca.h errors.h location.h scanner.h
+#
+#errors.o: errors.h location.h /usr/include/stdio.h /usr/include/features.h
+#errors.o: /usr/include/sys/cdefs.h /usr/include/bits/wordsize.h
+#errors.o: /usr/include/gnu/stubs.h /usr/include/gnu/stubs-64.h
+#errors.o: /usr/include/bits/types.h /usr/include/bits/typesizes.h
+#errors.o: /usr/include/libio.h /usr/include/_G_config.h /usr/include/wchar.h
+#errors.o: /usr/include/bits/wchar.h /usr/include/gconv.h
+#errors.o: /usr/include/bits/stdio_lim.h /usr/include/bits/sys_errlist.h
+#utility.o: utility.h /usr/include/stdlib.h /usr/include/features.h
+#utility.o: /usr/include/sys/cdefs.h /usr/include/bits/wordsize.h
+#utility.o: /usr/include/gnu/stubs.h /usr/include/gnu/stubs-64.h
+#utility.o: /usr/include/sys/types.h /usr/include/bits/types.h
+#utility.o: /usr/include/bits/typesizes.h /usr/include/time.h
+#utility.o: /usr/include/endian.h /usr/include/bits/endian.h
+#utility.o: /usr/include/sys/select.h /usr/include/bits/select.h
+#utility.o: /usr/include/bits/sigset.h /usr/include/bits/time.h
+#utility.o: /usr/include/sys/sysmacros.h /usr/include/bits/pthreadtypes.h
+#utility.o: /usr/include/alloca.h /usr/include/stdio.h /usr/include/libio.h
+#utility.o: /usr/include/_G_config.h /usr/include/wchar.h
+#utility.o: /usr/include/bits/wchar.h /usr/include/gconv.h
+#utility.o: /usr/include/bits/stdio_lim.h /usr/include/bits/sys_errlist.h
+#utility.o: /usr/include/string.h
+#main.o: /usr/include/string.h /usr/include/features.h
+#main.o: /usr/include/sys/cdefs.h /usr/include/bits/wordsize.h
+#main.o: /usr/include/gnu/stubs.h /usr/include/gnu/stubs-64.h
+#main.o: /usr/include/stdio.h /usr/include/bits/types.h
+#main.o: /usr/include/bits/typesizes.h /usr/include/libio.h
+#main.o: /usr/include/_G_config.h /usr/include/wchar.h
+#main.o: /usr/include/bits/wchar.h /usr/include/gconv.h
+#main.o: /usr/include/bits/stdio_lim.h /usr/include/bits/sys_errlist.h
+#main.o: utility.h /usr/include/stdlib.h /usr/include/sys/types.h
+#main.o: /usr/include/time.h /usr/include/endian.h /usr/include/bits/endian.h
+#main.o: /usr/include/sys/select.h /usr/include/bits/select.h
+#main.o: /usr/include/bits/sigset.h /usr/include/bits/time.h
+#main.o: /usr/include/sys/sysmacros.h /usr/include/bits/pthreadtypes.h
+#main.o: /usr/include/alloca.h errors.h location.h scanner.h

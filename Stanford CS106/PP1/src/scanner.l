@@ -1,7 +1,7 @@
 /* File:  scanner.l
  * ----------------
  * Lex input file to generate the scanner for the compiler.
- */
+*/
 
 %{
 
@@ -15,6 +15,10 @@
 #include "scanner.h"
 #include "utility.h" // for PrintDebug()
 #include "errors.h"
+
+#define TAB_SIZE 4
+
+static int curLineNum=1,curColNum=1;
 
 /* Global variable: yylval
  * -----------------------
@@ -33,7 +37,7 @@ YYSTYPE yylval;  // manually declared for pp1, later Yacc provides
  */
 struct yyltype yylloc; // manually dclared for pp1, later Yacc provides
 
-/* Macro: YY_USER_ACTION 
+/* Macro: YY_USER_ACTION
  * ---------------------
  * This flex built-in macro can be defined to provide an action which is
  * always executed prior to any matched rule's action. Basically, it is
@@ -43,8 +47,10 @@ struct yyltype yylloc; // manually dclared for pp1, later Yacc provides
  * be called once for each pattern scanned from the file, before
  * executing its action.
  */
-static void DoBeforeEachAction(); 
+static void DoBeforeEachAction();
 #define YY_USER_ACTION DoBeforeEachAction();
+
+//#define OUTPUT(type) LexPrinter::getDefaultPrinter().printToken(yytext, #type);
 
 %}
 
@@ -52,14 +58,113 @@ static void DoBeforeEachAction();
   * input file. Here is where you set options for the scanner, define lex
   * states, and can set up definitions to give names to regular expressions
   * as a simple substitution mechanism that allows for more readable
-  * entries in the Rules section later. 
+  * entries in the Rules section later.
   */
 
+integer		([0-9]+)
+integerHex	(0[xX][0-9a-fA-F]+)
+double		({integer}"."[0-9]+[eE][+-]?{integer})
+bool		(true|false)
+terString	(\"(\\.|[^\n"\\])*)
+string		({terString}\")
+commentLine	("//"[^\n]*)
+commentBegin    ("/*"([^\*]|(\*)*[^\*/])*(\*)*)
+comment		({commentBegin}"*/")
+operator	([+\-*/%<=!;,.\[\](){}])
+identifier	([a-zA-Z][_0-9a-zA-Z]*)
 
-%%             /* BEGIN RULES SECTION */
+
+%%
+ /* BEGIN RULES SECTION */
  /* All patterns and actions should be placed between the start and stop
-  * %% markers which delimit the Rules section. 
-  */ 
+  * %% markers which delimit the Rules section.
+  */
+
+ /* keywords */
+
+"void"			{ return T_Void; 	}
+"int"			{ return T_Int; 	}
+"double"		{ return T_Double; 	}
+"bool"			{ return T_Bool; 	}
+"string"		{ return T_String; 	}
+"class"			{ return T_Class; 	}
+"interface"		{ return T_Interface; 	}
+"null"			{ return T_Null; 	}
+"this"			{ return T_This; 	}
+"extends"		{ return T_Extends; 	}
+"implements"		{ return T_Implements; 	}
+"for"			{ return T_For; 	}
+"while"			{ return T_While; 	}
+"if"			{ return T_If; 		}
+"else"			{ return T_Else; 	}
+"return"		{ return T_Return; 	}
+"break"			{ return T_Break; 	}
+"new"			{ return T_New; 	}
+"NewArray"		{ return T_NewArray; 	}
+"Print"			{ return T_Print;	}
+"ReadInteger"	{ return T_ReadInteger; }
+"ReadLine"		{ return T_ReadLine; 	}
+
+ /* Constant */
+{integer}		{ yylval.integerConstant = strtol(yytext, NULL, 10);
+		 	  return T_IntConstant;		}
+
+{integerHex}		{ yylval.integerConstant = strtol(yytext, NULL, 16);
+		  	  return T_IntConstant; 	}
+
+{double}		{ yylval.doubleConstant = atof(yytext);
+		 	  return T_DoubleConstant; 	}
+
+{bool}			{ yylval.boolConstant = yytext[0] == 't';
+			  return T_Bool; 		}
+
+{string}		{ yylval.stringConstant = strdup(yytext);
+		 	  return T_StringConstant; 	}
+
+@todo
+{terString}		{ ReportError::UntermString(&yylloc,yytext); }
+
+ /* Operators and punctuation characters */
+"<="			{ return T_LessEqual; 		}
+">="			{ return T_GreaterEqual; 	}
+"=="			{ return T_Equal; 		}
+"!="			{ return T_NotEqual; 		}
+"&&"			{ return T_And; 		}
+"||"			{ return T_Or; 			}
+"[]"			{ return T_Dims; 		}
+{operator}		{ return yytext[0]; 		}	//single character
+
+
+ /* Comment */
+{commentLine}		{ }
+{commentBegin}		{ ReportError::UntermComment(); }
+{comment}		{ }
+
+
+ /* Identifier */
+{identifier}		{ if (strlen(yytext)>MaxIdentLen)
+			  	ReportError::LongIdentifier(&yylloc,yytext);
+			  else {
+			  	strncpy(yylval.identifier,yytext,MaxIdentLen);
+			  	return T_Identifier;
+			  }
+			}
+
+ /* new line or tab */
+<*>\n           	{
+			    curLineNum++; curColNum = 1;
+			}
+
+<*>[\t]         	{ curColNum += TAB_SIZE - curColNum%TAB_SIZE + 1; }
+
+ /* ignore spaces */
+[ \r]+            	{ }
+
+
+ /* Default (error) */
+. 			{ ReportError::UnrecogChar(&yylloc, yytext[0]); }
+
+ /*  */
 
 %%
 /* The closing %% above marks the end of the Rules section and the beginning
@@ -95,4 +200,7 @@ void InitScanner()
  */
 static void DoBeforeEachAction()
 {
+    yylloc.first_line = curLineNum;
+    yylloc.first_column = curColNum;
+    yylloc.last_column = curColNum + yyleng - 1;
 }
