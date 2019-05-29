@@ -1,0 +1,59 @@
+//全局变量
+int n;
+
+/*函数声明*/
+int test(int a,int b) {
+    // 变量声明
+    int c;
+    bool flag;
+    string s;
+    //赋值
+    flag = true;
+    c = 1;
+    c = 0x10;
+    s = "123";
+    c = c+1;
+    //函数调用
+    g(a);
+    // for循环
+    for (;a<1;a=a+1){
+        int d;
+        // if 条件语句
+        if (d < b) {
+            //break
+            break;
+        }
+        else if (d>b) {
+            a = a + 1;
+        }
+    }
+    // while 循环
+    while (b<c) {
+
+    }
+    //return测试
+    return 0;
+}
+
+//测试用函数
+int g(int b){
+
+}
+
+
+//类定义
+class A {
+    int a;
+}
+//接口定义
+interface B {
+    int b();
+}
+//继承与实现
+class C extends A implements B {
+    int c;
+
+    int f(){
+
+    }
+}
