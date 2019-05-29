@@ -177,6 +177,11 @@ void InitScanner()
  */
 static void DoBeforeEachAction()
 {
+    curLineNum = yylineno;
+    yylloc.first_line = curLineNum;
+    yylloc.first_column = curColNum;
+    yylloc.last_column = curColNum + yyleng - 1;
+    curColNum += yyleng;
 }
 
 /* Function: GetLineNumbered()

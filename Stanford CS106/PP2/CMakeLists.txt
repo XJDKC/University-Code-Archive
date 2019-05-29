@@ -24,4 +24,8 @@ add_executable(PP2
         src/parser.h
         src/scanner.h
         src/utility.cc
-        src/utility.h)
+        src/utility.h
+        src/y.tab.c
+        src/y.tab.h
+        src/lex.yy.c
+        )
