@@ -10,7 +10,8 @@
  * of the definitions of the yylex() function. Add other header file inclusions
  * or C++ variable declarations/prototypes that are needed by your code here.
  */
-
+#include <stdio.h>
+#include <string>
 #include <string.h>
 #include "scanner.h"
 #include "utility.h" // for PrintDebug()
@@ -30,6 +31,10 @@
 
 #define TAB_SIZE 4
 
+bool state = false;
+
+List<const char *> allLines;
+
 static int curLineNum=1,curColNum=1;
 
 static void DoBeforeEachAction();
@@ -43,6 +48,9 @@ static void DoBeforeEachAction();
   * as a simple substitution mechanism that allows for more readable
   * entries in the Rules section later.
   */
+
+%s CODE
+%x TEXT
 
 integer		([0-9]+)
 integerHex	(0[xX][0-9a-fA-F]+)
@@ -118,9 +126,9 @@ identifier	([a-zA-Z][_0-9a-zA-Z]*)
 
 
  /* Comment */
-{singleComment}	{								}
-{commentBegin}	{ ReportError::UntermComment(); }
-{comment}		{ 								}
+{singleComment}	{ 		}
+{commentBegin}	{ 				}
+{comment}		{			}
 
 
  /* Identifier */
@@ -132,16 +140,36 @@ identifier	([a-zA-Z][_0-9a-zA-Z]*)
 				}
 
  /* new line or tab */
-<*>\n           { curLineNum++; curColNum = 1;	}
+<*>\n           {
+				  curColNum = 1;
+				  if (YYSTATE == TEXT) {
+				  	  allLines.Append("");
+				  	  PrintDebug("Line: ",allLines.Nth(allLines.NumElements()-1));
+				  }
+				  else
+				  	  BEGIN(TEXT);
+                }
 
-<*>[\t]        	{ curColNum += TAB_SIZE - curColNum%TAB_SIZE + 1; }
+<*>\t        	{ curColNum += TAB_SIZE - curColNum%TAB_SIZE + 1; }
 
  /* ignore spaces */
 [ \r]+          { }
 
+
+<TEXT>.*		{
+					allLines.Append(strdup(yytext));
+					PrintDebug("Line: ",allLines.Nth(allLines.NumElements()-1));
+					curColNum = 1;
+					yyless(0);
+					BEGIN(CODE);
+				}
+
+<TEXT><<EOF>>	{
+					BEGIN(CODE);
+				}
+
  /* Default (error) */
 . 				{ ReportError::UnrecogChar(&yylloc, yytext[0]); }
-
 
 %%
 /* The closing %% above marks the end of the Rules section and the beginning
@@ -167,6 +195,8 @@ void InitScanner()
 {
     PrintDebug("lex", "Initializing scanner");
     yy_flex_debug = false;
+
+    BEGIN(TEXT);
 }
 
 
@@ -192,5 +222,8 @@ static void DoBeforeEachAction()
  * free to use this stub implementation.
  */
 const char *GetLineNumbered(int num) {
-  return NULL;
+
+   	if (num <= 0 || num > allLines.NumElements())
+       return NULL;
+   return allLines.Nth(num-1);
 }

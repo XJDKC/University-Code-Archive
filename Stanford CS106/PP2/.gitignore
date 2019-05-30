@@ -1,4 +1,6 @@
 .idea
 cmake-build-debug
+samples
+samples-test
 src/parser.y.b
 src/scanner.l.b
