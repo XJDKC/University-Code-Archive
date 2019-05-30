@@ -103,8 +103,9 @@ class CompoundExpr : public Expr
     Expr *left, *right; // left will be NULL if unary
     
   public:
-    CompoundExpr(Expr *lhs, Operator *op, Expr *rhs); // for binary
-    CompoundExpr(Operator *op, Expr *rhs);             // for unary
+    CompoundExpr(Expr *lhs, Operator *op, Expr *rhs);   // for binary
+    CompoundExpr(Operator *op, Expr *rhs);              // for unary
+    CompoundExpr(Expr *lhs, Operator *op);              // for ++ --
     void PrintChildren(int indentLevel);
 };
 
@@ -240,5 +241,12 @@ class ReadLineExpr : public Expr
     const char *GetPrintNameForNode() { return "ReadLineExpr"; }
 };
 
-    
+
+class PostfixExpr : public CompoundExpr
+{
+  public:
+    PostfixExpr(Expr *lhs, Operator *op) : CompoundExpr(lhs,op) {}
+    const char *GetPrintNameForNode() { return "PostfixExpr"; }
+};
+
 #endif

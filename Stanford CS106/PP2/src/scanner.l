@@ -115,6 +115,8 @@ identifier	([a-zA-Z][_0-9a-zA-Z]*)
 {terString}		{ ReportError::UntermString(&yylloc,yytext); }
 
  /* Operators and punctuation characters */
+"++"			{ return T_Incr;			}
+"--"			{ return T_Decr;			}
 "<="			{ return T_LessEqual; 		}
 ">="			{ return T_GreaterEqual; 	}
 "=="			{ return T_Equal; 			}

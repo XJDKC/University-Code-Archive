@@ -89,7 +89,8 @@ void yyerror(const char *msg); // standard error-handling routine
  * Bison will assign unique numbers to these and export the #define
  * in the generated y.tab.h header file.
  */
-%token   T_Void T_Bool T_Int T_Double T_String T_Class 
+%token   T_Incr T_Decr
+%token   T_Void T_Bool T_Int T_Double T_String T_Class
 %token   T_LessEqual T_GreaterEqual T_Equal T_NotEqual T_Dims
 %token   T_And T_Or T_Null T_Extends T_This T_Interface T_Implements
 %token   T_While T_For T_If T_Else T_Return T_Break
@@ -142,7 +143,7 @@ void yyerror(const char *msg); // standard error-handling routine
 %left      '+' '-'
 %left      '*' '/' '%'
 %nonassoc  T_UnaryMinus '!'
-%nonassoc  '.' '['
+%nonassoc  '.' '[' T_Incr T_Decr
 %nonassoc  T_IFX
 %nonassoc  T_Else
 
@@ -279,8 +280,10 @@ LValue 			:	T_Identifier			{ $$ = new FieldAccess(NULL, new Identifier(@1, $1));
 Expr			:	Call						{ $$ = $1; 													}
 				|	LValue						{ $$ = $1;													}
 				|	T_This						{ $$ = new This(@1);										}
-				|	Constant					{ $$ = new This(@1);										}
+				|	Constant					{ $$ = $1;													}
 				|	'(' Expr ')'				{ $$ = $2;													}
+				|	LValue T_Incr				{ $$ = new PostfixExpr($1, new Operator(@2, "++"));			}
+				|	LValue T_Decr				{ $$ = new PostfixExpr($1, new Operator(@2, "--"));			}
 				|	Expr '+' Expr				{ $$ = new ArithmeticExpr($1, new Operator(@2, "+"), $3);	}
 				|	Expr '-' Expr				{ $$ = new ArithmeticExpr($1, new Operator(@2, "-"), $3);	}
 				|	Expr '*' Expr				{ $$ = new ArithmeticExpr($1, new Operator(@2, "*"), $3);	}
@@ -294,7 +297,7 @@ Expr			:	Call						{ $$ = $1; 													}
 				|	Expr T_Equal Expr			{ $$ = new EqualityExpr($1, new Operator(@2,"=="), $3);		}
 				|	Expr T_NotEqual Expr		{ $$ = new EqualityExpr($1, new Operator(@2,"!="), $3);		}
 				|	Expr T_And Expr				{ $$ = new LogicalExpr($1, new Operator(@2,"&&"), $3);		}
-				|	Expr T_Or Expr				{ $$ = new LogicalExpr($1, new Operator(@2,"&&"), $3);		}
+				|	Expr T_Or Expr				{ $$ = new LogicalExpr($1, new Operator(@2,"||"), $3);		}
 				|	'!' Expr					{ $$ = new LogicalExpr(new Operator(@1,"!"), $2);			}
 				|	'-' Expr %prec T_UnaryMinus { $$ = new ArithmeticExpr(new Operator(@1,"-"), $2);		}
 				|	T_ReadInteger '(' ')'		{ $$ = new ReadIntegerExpr(Join(@1,@3));					}
@@ -315,7 +318,7 @@ ExprList		:	Expr						{ ($$ = new List<Expr*>)->Append($1); }
 Constant		:	T_Null						{ $$ = new NullConstant(@1); 		}
 				|	T_IntConstant				{ $$ = new IntConstant(@1,$1); 		}
 				|	T_BoolConstant				{ $$ = new BoolConstant(@1,$1);		}
-				|	T_DoubleConstant			{ $$ = new IntConstant(@1,$1); 		}
+				|	T_DoubleConstant			{ $$ = new DoubleConstant(@1,$1);	}
 				|	T_StringConstant			{ $$ = new StringConstant(@1,$1);	}
 				;
 
