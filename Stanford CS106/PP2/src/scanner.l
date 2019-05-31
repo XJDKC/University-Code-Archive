@@ -61,7 +61,7 @@ string		({terString}\")
 singleComment	("//"[^\n]*)
 commentBegin    ("/*"([^\*]|(\*)*[^\*/])*)
 comment		({commentBegin}(\*)*"*/")
-operator	([+\-*/%<>=!;,.\[\](){}])
+operator	([+\-*/%<>=!:;,.\[\](){}])
 identifier	([a-zA-Z][_0-9a-zA-Z]*)
 
 %%
@@ -87,6 +87,9 @@ identifier	([a-zA-Z][_0-9a-zA-Z]*)
 "while"			{ return T_While; 		}
 "if"			{ return T_If; 			}
 "else"			{ return T_Else; 		}
+"switch"		{ return T_Switch;		}
+"case"			{ return T_Case;		}
+"default"		{ return T_Default;		}
 "return"		{ return T_Return; 		}
 "break"			{ return T_Break; 		}
 "new"			{ return T_New; 		}

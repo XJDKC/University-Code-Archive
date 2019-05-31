@@ -80,6 +80,9 @@ void yyerror(const char *msg); // standard error-handling routine
 	//Others
     LValue *lValue;
     Call *call;
+    Case *caseStmt;
+    Default *defaultStmt;
+    List<Case *> *caseList;
 }
 
 
@@ -89,7 +92,7 @@ void yyerror(const char *msg); // standard error-handling routine
  * Bison will assign unique numbers to these and export the #define
  * in the generated y.tab.h header file.
  */
-%token   T_Incr T_Decr
+%token   T_Incr T_Decr T_Switch T_Case T_Default
 %token   T_Void T_Bool T_Int T_Double T_String T_Class
 %token   T_LessEqual T_GreaterEqual T_Equal T_NotEqual T_Dims
 %token   T_And T_Or T_Null T_Extends T_This T_Interface T_Implements
@@ -133,6 +136,9 @@ void yyerror(const char *msg); // standard error-handling routine
 %type <exprList>		ExprList Actuals
 %type <lValue>			LValue
 %type <call>			Call
+%type <caseStmt>		Case
+%type <caseList>		Cases
+%type <defaultStmt>		Default
 
 
 %left     '='
@@ -249,20 +255,36 @@ Stmt			:	OptExpr ';'			{ $$ = $1; 										}
 				|	T_If '(' Expr ')' Stmt OptElse
 										{ $$ = new IfStmt($3, $5, $6);					}
 				|	T_While '(' Expr ')' Stmt
-										{ $$ = new WhileStmt($3, $5);						}
+										{ $$ = new WhileStmt($3, $5);					}
 				|	T_For '(' OptExpr ';' Expr ';' OptExpr ')' Stmt
 										{ $$ = new ForStmt($3, $5, $7, $9);				}
+				|	T_Switch '(' Expr ')' '{' Cases Default '}'
+										{ $$ = new SwitchStmt($3,$6,$7);				}
 				|	T_Print	'(' ExprList ')' ';'
 										{ $$ = new PrintStmt($3);						}
 				;
 
-OptExpr			:	Expr			{ $$ = $1; }
-				|					{ $$ = new EmptyExpr();}
+Case			:	T_Case T_IntConstant ':' Stmts
+										{ $$ = new Case(new IntConstant(@2,$2),$4);	}
+				;
+
+Cases			:	Case				{ ($$ = new List<Case *>)->Append($1);			}
+				|	Cases Case			{ ($$ = $1)->Append($2);						}
+				;
+
+Default			:						{ $$ = NULL;									}
+				|	T_Default ':' Stmts
+				 						{ $$ = new Default($3);							}
+				;
+
+OptExpr			:	Expr				{ $$ = $1;										}
+				|						{ $$ = new EmptyExpr();}
 				;
 
 OptElse			:	%prec T_IFX			{ $$ = NULL;									}
 				|	T_Else Stmt			{ $$ = $2;										}
 				;
+
 
 Call			:	T_Identifier '(' Actuals ')'
 										{ $$ = new Call(Join(@1,@4), NULL, new Identifier(@1,$1), $3); }
