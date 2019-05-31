@@ -118,10 +118,4 @@ void SwitchStmt::PrintChildren(int indentLevel) {
     cases->PrintAll(indentLevel+1);
     defaultBody->Print(indentLevel+1);
 
-    switch(1) {
-        case 1:
-                break;
-                break;
-        case 2:;
-    }
 }

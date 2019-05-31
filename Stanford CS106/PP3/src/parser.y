@@ -80,6 +80,9 @@ void yyerror(const char *msg); // standard error-handling routine
 	//Others
     LValue *lValue;
     Call *call;
+	Case *caseStmt;
+	Default *defaultStmt;
+	List<Case *> *caseList;
 }
 
 
@@ -132,6 +135,9 @@ void yyerror(const char *msg); // standard error-handling routine
 %type <exprList>		ExprList Actuals
 %type <lValue>			LValue
 %type <call>			Call
+%type <caseStmt>		Case
+%type <caseList>		Cases
+%type <defaultStmt>		Default
 
 
 %left     '='
@@ -142,7 +148,7 @@ void yyerror(const char *msg); // standard error-handling routine
 %left      '+' '-'
 %left      '*' '/' '%'
 %nonassoc  T_UnaryMinus '!'
-%nonassoc  '.' '['
+%nonassoc  '.' '[' T_Incr T_Decr
 %nonassoc  T_IFX
 %nonassoc  T_Else
 
@@ -251,8 +257,23 @@ Stmt			:	OptExpr ';'					{ $$ = $1; 									}
 												{ $$ = new WhileStmt($3, $5);				}
 				|	T_For '(' OptExpr ';' Expr ';' OptExpr ')' Stmt
 												{ $$ = new ForStmt($3, $5, $7, $9);			}
+				|	T_Switch '(' Expr ')' '	{' Cases Default '}'
+												{ $$ = new SwitchStmt($3,$6,$7);			}
 				|	T_Print	'(' ExprList ')' ';'
 												{ $$ = new PrintStmt($3);					}
+				;
+
+Case			:	T_Case T_IntConstant ':' Stmts
+												{ $$ = new Case(new IntConstant(@2,$2),$4);	}
+				;
+
+Cases			:	Case						{ ($$ = new List<Case *>)->Append($1);		}
+				|	Cases Case					{ ($$ = $1)->Append($2);					}
+				;
+
+Default			:								{ $$ = NULL;								}
+				|	T_Default ':' Stmts
+				 								{ $$ = new Default($3);						}
 				;
 
 OptExpr			:	Expr						{ $$ = $1;									}
@@ -279,8 +300,10 @@ LValue 			:	T_Identifier				{ $$ = new FieldAccess(NULL, new Identifier(@1, $1))
 Expr			:	Call						{ $$ = $1; 														}
 				|	LValue						{ $$ = $1;														}
 				|	T_This						{ $$ = new This(@1);											}
-				|	Constant					{ $$ = new This(@1);											}
+				|	Constant					{ $$ = $1;														}
 				|	'(' Expr ')'				{ $$ = $2;														}
+				|	LValue T_Incr				{ $$ = new PostfixExpr($1, new Operator(@2, "++"));				}
+				|	LValue T_Decr				{ $$ = new PostfixExpr($1, new Operator(@2, "--"));				}
 				|	Expr '+' Expr				{ $$ = new ArithmeticExpr($1, new Operator(@2, "+"), $3);		}
 				|	Expr '-' Expr				{ $$ = new ArithmeticExpr($1, new Operator(@2, "-"), $3);		}
 				|	Expr '*' Expr				{ $$ = new ArithmeticExpr($1, new Operator(@2, "*"), $3);		}
@@ -294,7 +317,7 @@ Expr			:	Call						{ $$ = $1; 														}
 				|	Expr T_Equal Expr			{ $$ = new EqualityExpr($1, new Operator(@2,"=="), $3);			}
 				|	Expr T_NotEqual Expr		{ $$ = new EqualityExpr($1, new Operator(@2,"!="), $3);			}
 				|	Expr T_And Expr				{ $$ = new LogicalExpr($1, new Operator(@2,"&&"), $3);			}
-				|	Expr T_Or Expr				{ $$ = new LogicalExpr($1, new Operator(@2,"&&"), $3);			}
+				|	Expr T_Or Expr				{ $$ = new LogicalExpr($1, new Operator(@2,"||"), $3);			}
 				|	'!' Expr					{ $$ = new LogicalExpr(new Operator(@1,"!"), $2);				}
 				|	'-' Expr %prec T_UnaryMinus { $$ = new ArithmeticExpr(new Operator(@1,"-"), $2);			}
 				|	T_ReadInteger '(' ')'		{ $$ = new ReadIntegerExpr(Join(@1,@3));						}
@@ -315,7 +338,7 @@ ExprList		:	Expr						{ ($$ = new List<Expr*>)->Append($1);		}
 Constant		:	T_Null						{ $$ = new NullConstant(@1); 				}
 				|	T_IntConstant				{ $$ = new IntConstant(@1,$1); 				}
 				|	T_BoolConstant				{ $$ = new BoolConstant(@1,$1);				}
-				|	T_DoubleConstant			{ $$ = new IntConstant(@1,$1); 				}
+				|	T_DoubleConstant			{ $$ = new DoubleConstant(@1,$1); 			}
 				|	T_StringConstant			{ $$ = new StringConstant(@1,$1);			}
 				;
 
