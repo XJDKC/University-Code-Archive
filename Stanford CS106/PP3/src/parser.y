@@ -92,6 +92,7 @@ void yyerror(const char *msg); // standard error-handling routine
  * Bison will assign unique numbers to these and export the #define
  * in the generated y.tab.h header file.
  */
+%token   T_Incr T_Decr T_Switch T_Case T_Default
 %token   T_Void T_Bool T_Int T_Double T_String T_Class
 %token   T_LessEqual T_GreaterEqual T_Equal T_NotEqual T_Dims
 %token   T_And T_Or T_Null T_Extends T_This T_Interface T_Implements
@@ -211,7 +212,7 @@ OptExt			:						   		{ $$ = NULL; 									}
 
 OptImpl			:							  	{ $$ = new List<NamedType *>;					}
 				|	OptImpl ',' T_Identifier  	{ ($$ = $1)->Append(new NamedType(new Identifier(@3,$3)));						}
-				|	T_Implements T_Identifier 	{ ($$ = new List<NamedType *>)->Append(new NamedType(new Identifier(@2,$2)))	}
+				|	T_Implements T_Identifier 	{ ($$ = new List<NamedType *>)->Append(new NamedType(new Identifier(@2,$2)));	}
 				;
 
 Field			:	VarDecl						{ $$ = $1; 										}
@@ -257,7 +258,7 @@ Stmt			:	OptExpr ';'					{ $$ = $1; 									}
 												{ $$ = new WhileStmt($3, $5);				}
 				|	T_For '(' OptExpr ';' Expr ';' OptExpr ')' Stmt
 												{ $$ = new ForStmt($3, $5, $7, $9);			}
-				|	T_Switch '(' Expr ')' '	{' Cases Default '}'
+				|	T_Switch '(' Expr ')' '{' Cases Default '}'
 												{ $$ = new SwitchStmt($3,$6,$7);			}
 				|	T_Print	'(' ExprList ')' ';'
 												{ $$ = new PrintStmt($3);					}

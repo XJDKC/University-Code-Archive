@@ -95,8 +95,9 @@ class CompoundExpr : public Expr
     Expr *left, *right; // left will be NULL if unary
     
   public:
-    CompoundExpr(Expr *lhs, Operator *op, Expr *rhs); // for binary
-    CompoundExpr(Operator *op, Expr *rhs);             // for unary
+    CompoundExpr(Expr *lhs, Operator *op, Expr *rhs);   // for binary
+    CompoundExpr(Operator *op, Expr *rhs);              // for unary
+    CompoundExpr(Expr *lhs, Operator *op);              // for ++ --
 };
 
 class ArithmeticExpr : public CompoundExpr 
@@ -216,5 +217,9 @@ class ReadLineExpr : public Expr
     ReadLineExpr(yyltype loc) : Expr (loc) {}
 };
 
-    
+class PostfixExpr : public CompoundExpr
+{
+public:
+    PostfixExpr(Expr *lhs, Operator *op) : CompoundExpr(lhs,op) {}
+};
 #endif

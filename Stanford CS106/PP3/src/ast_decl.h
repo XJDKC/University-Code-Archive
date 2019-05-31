@@ -73,11 +73,4 @@ class FnDecl : public Decl
     void SetFunctionBody(Stmt *b);
 };
 
-class PostfixExpr : public CompoundExpr
-{
-public:
-    PostfixExpr(Expr *lhs, Operator *op) : CompoundExpr(lhs,op) {}
-    const char *GetPrintNameForNode() { return "PostfixExpr"; }
-};
-
 #endif
