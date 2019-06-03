@@ -27,13 +27,6 @@ export default {
     query () {
       axios.get(this.path + this.api)
         .then(res => { console.log(res.data); this.queryInfo = res.data })
-    },
-    TransType (row, column) {
-      if (parseInt(row.CTerm.substring(4, 2)) <= 6) {
-        return row.CTerm.substring(0, 4) + '年春季学期'
-      } else {
-        return row.CTerm.substring(0, 4) + '年秋季学期'
-      }
     }
   }
 

@@ -37,12 +37,12 @@ export default {
   data () {
     return {
       menuName: [
-        { submenu: '导航1', icon: 'el-icon-location', childs: ['选项1', '选项2'] },
-        { submenu: '导航2', icon: 'el-icon-menu', childs: ['选项3', '选项4'] },
-        { submenu: '导航3', icon: 'el-icon-location', childs: ['选项5', '选项6'] }
+        { submenu: '成绩查询', icon: 'el-icon-location', childs: ['总成绩查询', '单科成绩查询'] },
+        { submenu: '课堂查询', icon: 'el-icon-menu', childs: ['查询所选课堂'] }
       ],
+      Usrname: 'T201610282',
       menuList: [ 'Student' ],
-      isCollapse: false,
+      isCollapse: true,
       showMenuNo: '0'
     }
   },
