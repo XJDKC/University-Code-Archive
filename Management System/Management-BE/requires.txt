@@ -1,0 +1,15 @@
+alembic
+amqp
+billiard
+celery
+certifi
+chardet
+Flask
+Flask-Migrate
+Flask-Script
+Flask-Session
+Flask-SQLAlchemy
+Flask-WTF
+Jinja2
+kombu
+Mako
