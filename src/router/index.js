@@ -30,7 +30,6 @@ export default new Router({
       path: '/manager',
       name: 'manager',
       component: manager
-
     },
     {
       path: '/teacher',

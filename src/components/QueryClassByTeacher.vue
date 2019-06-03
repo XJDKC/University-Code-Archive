@@ -5,8 +5,6 @@
       <el-table-column align="left" prop="ClassID" label="课堂编号"></el-table-column>
       <el-table-column align="center" prop="CID" label="课程编号"></el-table-column>
       <el-table-column align="center" prop="CName" label="课堂名称"></el-table-column>
-      <el-table-column align="center" prop="TID" label="教师编号"></el-table-column>
-      <el-table-column align="right" prop="TName" label="教师名称"></el-table-column>
     </el-table>
   </el-main>
 </template>
@@ -15,21 +13,21 @@
 import axios from 'axios'
 
 export default {
-  name: 'QueryClasses',
+  name: 'QueryClassByTeacher',
   data () {
     return {
       path: 'http://localhost:5000',
-      api: '/QueryClasses',
+      api: '/QueryClassByTeacher',
+      Usrname: 'T201610282',
       queryInfo: []
     }
   },
   methods: {
     query () {
-      axios.get(this.path + this.api)
+      axios.post(this.path + this.api, {TID: this.Usrname})
         .then(res => { console.log(res.data); this.queryInfo = res.data })
     }
   }
-
 }
 </script>
 

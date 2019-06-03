@@ -8,9 +8,9 @@
     </el-radio-group>
     <el-button @click="query">查询</el-button>
     <el-table :data="queryInfo" style="width: 100%">
-      <el-table-column  align="left" prop="Usrname" label="账号"></el-table-column>
+      <el-table-column  align="left" prop="Username" label="账号"></el-table-column>
       <el-table-column  align="center" prop="Password" label="密码"></el-table-column>
-      <el-table-column  align="right" prop="Usrtype" label="账号类型" :formatter="TransType"></el-table-column>
+      <el-table-column  align="right" prop="Usertype" label="账号类型" :formatter="TransType"></el-table-column>
     </el-table>
   </el-main>
 </template>
@@ -19,12 +19,12 @@
 import axios from 'axios'
 
 export default {
-  name: 'QueryAccounts',
+  name: 'QueryUsers',
   data () {
     return {
       type: -1,
       path: 'http://localhost:5000',
-      api: '/QueryAccounts',
+      api: '/QueryUsers',
       queryInfo: []
     }
   },
@@ -39,7 +39,7 @@ export default {
       }
     },
     TransType (row, column) {
-      switch (row.Usrtype) {
+      switch (row.Usertype) {
         case 0: return '管理员'
         case 1: return '教师'
         case 2: return '学生'

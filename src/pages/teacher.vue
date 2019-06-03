@@ -20,7 +20,8 @@
     </el-menu>
     <el-container>
       <Header :newList="menuList" v-on:collapseMenu="collapseMenu" v-on:help="help" v-on:quit="quit"></Header>
-      <test v-if="showMenuNo === '1-1'"></test>
+      <QueryClassByTeacher  v-if="showMenuNo === '1-1'"></QueryClassByTeacher>
+      <ModifyTaskWeight     v-if="showMenuNo === '1-2'"></ModifyTaskWeight>
       <el-footer></el-footer>
     </el-container>
   </el-container>
@@ -29,18 +30,20 @@
 <script>
 import Header from '@/components/Header'
 import test from '@/components/test'
+import QueryClassByTeacher from '../components/QueryClassByTeacher'
+import ModifyTaskWeight from '../components/ModifyTaskWeight'
 
 export default {
   name: 'teacher',
-  components: {Header, test},
+  components: {ModifyTaskWeight, QueryClassByTeacher, Header, test},
   data () {
     return {
       menuName: [
-        { submenu: '导航1', icon: 'el-icon-location', childs: ['选项1', '选项2'] },
-        { submenu: '导航2', icon: 'el-icon-menu', childs: ['选项3', '选项4'] },
-        { submenu: '导航3', icon: 'el-icon-location', childs: ['选项5', '选项6'] }
+        { submenu: '课堂信息管理', icon: 'el-icon-location', childs: ['课堂信息查询', '课堂信息修改'] },
+        { submenu: '成绩管理', icon: 'el-icon-menu', childs: ['成绩录入', '成绩查询'] }
       ],
-      isCollapse: false,
+      Usrname: 'T201610282',
+      isCollapse: true,
       showMenuNo: '1-1',
       menuList: ['Teacher']
     }

@@ -21,10 +21,17 @@
     </el-menu>
     <el-container>
       <Header :newList="menuList" v-on:collapseMenu="collapseMenu" v-on:help="help" v-on:quit="quit"></Header>
-      <QueryAccounts v-if="showMenuNo === '1-1'"></QueryAccounts>
-      <QueryTeachers v-if="showMenuNo === '1-2'"></QueryTeachers>
-      <QueryStudents v-if="showMenuNo === '1-3'"></QueryStudents>
-      <QueryCourses  v-if="showMenuNo === '1-4'"></QueryCourses>
+      <QueryUsers         v-if="showMenuNo === '1-1'"></QueryUsers>
+      <QueryTeachers      v-if="showMenuNo === '1-2'"></QueryTeachers>
+      <QueryStudents      v-if="showMenuNo === '1-3'"></QueryStudents>
+      <QueryCourses       v-if="showMenuNo === '1-4'"></QueryCourses>
+      <QueryClasses       v-if="showMenuNo === '1-5'"></QueryClasses>
+      <InsertUser         v-if="showMenuNo === '2-1'"></InsertUser>
+      <UpdateDeleteUser   v-if="showMenuNo === '2-2'"></UpdateDeleteUser>
+      <ModifyTeacherInfo  v-if="showMenuNo === '3-1'"></ModifyTeacherInfo>
+      <ModifyStudentInfo  v-if="showMenuNo === '3-2'"></ModifyStudentInfo>
+      <ModifyCourseInfo   v-if="showMenuNo === '4-1'"></ModifyCourseInfo>
+      <ModifyClassInfo    v-if="showMenuNo === '4-2'"></ModifyClassInfo>
       <el-footer></el-footer>
     </el-container>
   </el-container>
@@ -32,24 +39,33 @@
 
 <script>
 import Header from '@/components/Header'
-import QueryAccounts from '@/components/QueryAccounts'
 import QueryTeachers from '@/components/QueryTeachers'
 import QueryStudents from '@/components/QueryStudents'
 import QueryCourses from '@/components/QueryCourses'
+import QueryClasses from '../components/QueryClasses'
+import InsertUser from '../components/InsertUser'
+import UpdateDeleteUser from '../components/UpdateDeleteUser'
+import QueryUsers from '../components/QueryUsers'
+import ModifyTeacherInfo from '../components/ModifyTeacherInfo'
+import ModifyStudentInfo from '../components/ModifyStudentInfo'
+import ModifyCourseInfo from '../components/ModifyCourseInfo'
+import ModifyClassInfo from '../components/ModifyClassInfo'
 
 export default {
   name: 'manager',
-  components: {QueryCourses, QueryStudents, QueryTeachers, Header, QueryAccounts},
+  components: {
+    ModifyClassInfo, ModifyCourseInfo, ModifyStudentInfo, ModifyTeacherInfo, QueryUsers, UpdateDeleteUser, InsertUser, QueryClasses, QueryCourses, QueryStudents, QueryTeachers, Header},
   data () {
     return {
       menuName: [
         { submenu: '信息查询', icon: 'el-icon-location', childs: ['账号信息查询', '教师信息查询', '学生信息查询', '课程信息查询', '课堂信息查询'] },
-        { submenu: '账号信息管理', icon: 'el-icon-menu', childs: ['添加账号信息', '修改账号信息', '删除账号信息'] },
+        { submenu: '账号信息管理', icon: 'el-icon-menu', childs: ['添加账号信息', '更新删除账号'] },
         { submenu: '个体信息管理', icon: 'el-icon-location', childs: ['教师信息管理', '学生信息管理'] },
         { submenu: '课程课堂管理', icon: 'el-icon-location', childs: ['课程信息管理', '课堂信息管理'] },
         { submenu: '任务成绩管理', icon: 'el-icon-location', childs: ['课堂任务管理', '成绩信息管理'] }
       ],
-      isCollapse: false,
+      Usrname: 'M201610282',
+      isCollapse: true,
       showMenuNo: '1-1',
       menuList: ['Manager']
     }
@@ -65,6 +81,7 @@ export default {
       this.$emit('quit')
     },
     changeMenuList (key, keyPath) {
+      console.log(this.$route.params)
       this.showMenuNo = key
       var temp = this.menuName
       var keys = key.split('-')
@@ -78,6 +95,11 @@ export default {
           this.menuList.push(temp[keys[i] - 1])
         }
       }
+    },
+    mounted () {
+      this.Usrname = this.$route.params.Usrname
+      console.log(this.$route.params)
+      console.log(this.Usrname)
     }
   }
 }

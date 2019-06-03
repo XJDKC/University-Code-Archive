@@ -50,9 +50,8 @@ export default {
                 confirmButtonText: '确认'
               })
               var paras = {
-                'Usrname': this.username
+                Usrname: res.data.Usrname
               }
-              console.log(res.data.Usrtype)
               switch (res.data.Usrtype) {
                 case 0: router.push({name: 'manager', paras}); console.log(0); break
                 case 1: router.push({name: 'teacher', paras}); console.log(1); break
