@@ -13,8 +13,8 @@
     </el-menu>
     <el-container>
       <Header :menuList="menuList" :usrname="usrname" v-on:collapseMenu="collapseMenu" v-on:quit="quit"></Header>
-      <QueryClassByTeacher  v-if="showMenuNo === '1-1'"></QueryClassByTeacher>
-      <ModifyTaskWeight     v-if="showMenuNo === '1-2'"></ModifyTaskWeight>
+      <QueryClassByTeacher :usrname="usrname" v-if="showMenuNo === '1-1'"></QueryClassByTeacher>
+      <ModifyTaskWeight    :usrname="usrname" v-if="showMenuNo === '1-2'"></ModifyTaskWeight>
       <el-footer></el-footer>
     </el-container>
   </el-container>
