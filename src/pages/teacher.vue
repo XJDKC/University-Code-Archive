@@ -15,6 +15,7 @@
       <Header :menuList="menuList" :usrname="usrname" v-on:collapseMenu="collapseMenu" v-on:quit="quit"></Header>
       <QueryClassByTeacher :usrname="usrname" v-if="showMenuNo === '1-1'"></QueryClassByTeacher>
       <ModifyTaskWeight    :usrname="usrname" v-if="showMenuNo === '1-2'"></ModifyTaskWeight>
+      <InputScore          :usrname="usrname" v-if="showMenuNo === '2-1'"></InputScore>
       <el-footer></el-footer>
     </el-container>
   </el-container>
@@ -24,10 +25,11 @@
 import Header from '@/components/Header'
 import QueryClassByTeacher from '../components/QueryClassByTeacher'
 import ModifyTaskWeight from '../components/ModifyTaskWeight'
+import InputScore from '@/components/InputScore'
 
 export default {
   name: 'teacher',
-  components: {ModifyTaskWeight, QueryClassByTeacher, Header},
+  components: {InputScore, ModifyTaskWeight, QueryClassByTeacher, Header},
   data () {
     return {
       menuName: [

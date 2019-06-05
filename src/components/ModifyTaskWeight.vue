@@ -17,7 +17,7 @@
       <el-table-column align="center" prop="Weight" label="任务权重"></el-table-column>
       <el-table-column align="center" prop="Type" label="任务类型" :formatter="TransType"></el-table-column>
     </el-table>
-    <el-dialog title="教师信息" :visible.sync="dialogFormVisible" center style="width: 100%">
+    <el-dialog title="任务信息" :visible.sync="dialogFormVisible" center style="width: 100%">
       <el-table :data="weightList" style="width: 100%">
         <el-table-column align="left" type="index" label="序号"></el-table-column>
         <el-table-column align="center" property="TaskName" label="任务名称"></el-table-column>
@@ -98,13 +98,15 @@ export default {
     },
     update () {
       var sum = 0
+      console.log(this.weightList)
       for (var i = 0; i < this.weightList.length; i++) {
-        sum += this.weightList[i]
+        sum = sum + this.weightList[i].Weight
+        console.log(sum)
       }
       if (sum === 100) {
         axios.post(this.path + this.upateApi, {TID: this.usrname, ClassID: this.classID, Weights: this.weightList})
           .then(res => {
-            if (res['State'] === 'Success') {
+            if (res.data['State']) {
               this.$message({message: '修改成功', type: 'success'})
             } else {
               this.$message.error('修改失败')
