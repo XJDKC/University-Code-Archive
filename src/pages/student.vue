@@ -1,13 +1,6 @@
 <template>
   <el-container style="height: 100%">
-    <el-menu
-      @select="changeMenuList"
-      class="el-menu-vertical-demo"
-      text-color="#fff"
-      background-color="#304156"
-      active-text-color="#409eff"
-      :collapse="isCollapse"
-    >
+    <el-menu @select="changeMenuList" class="el-menu-vertical-demo" text-color="#fff" active-text-color="#409eff" background-color="#304156" :collapse="isCollapse">
       <el-submenu v-for="(first, i) in menuName" :key="i" :index="`${i+1}`">
         <template slot="title">
           <i :class="first.icon"></i>
@@ -19,7 +12,7 @@
       </el-submenu>
     </el-menu>
     <el-container>
-      <Header :newList="menuList" v-on:collapseMenu="collapseMenu" v-on:help="help" v-on:quit="quit"></Header>
+      <Header :menuList="menuList" :usrname="usrname" v-on:collapseMenu="collapseMenu" v-on:quit="quit"></Header>
       <test v-if="showMenuNo === '1-1'"></test>
       <el-footer></el-footer>
     </el-container>
@@ -40,7 +33,7 @@ export default {
         { submenu: '成绩查询', icon: 'el-icon-location', childs: ['总成绩查询', '单科成绩查询'] },
         { submenu: '课堂查询', icon: 'el-icon-menu', childs: ['查询所选课堂'] }
       ],
-      Usrname: 'T201610282',
+      usrname: '',
       menuList: [ 'Student' ],
       isCollapse: true,
       showMenuNo: '0'
@@ -50,11 +43,8 @@ export default {
     collapseMenu (data) {
       this.isCollapse = data
     },
-    help () {
-      this.$alert('Powered by XJDKC', '帮助', {confirmButtonText: '确认'})
-    },
     quit () {
-      this.$alert('确认退出？', '提示', {confirmButtonText: '确认'})
+      this.$router.push({name: 'login'})
     },
     changeMenuList (key, keyPath) {
       this.showMenuNo = key
@@ -71,6 +61,9 @@ export default {
         }
       }
     }
+  },
+  created: function () {
+    this.usrname = this.$route.params.Usrname
   }
 }
 </script>
@@ -81,6 +74,7 @@ export default {
   }
   .el-menu{
     color: #fff;
+    height: 100%;
     overflow-x: hidden;
     overflow-y: auto;
     background-color: #304156;

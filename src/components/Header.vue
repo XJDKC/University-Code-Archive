@@ -2,9 +2,9 @@
   <el-header style="text-align: right; font-size: 12px;">
     <ShowMenu v-on:menuIconClicked="collapseMenu"></ShowMenu>
 
-    <Breadcrumb :newList="menuList" />
+    <Breadcrumb :menuList="menuList" />
 
-    <Dropdown v-on:quit="quit" v-on:help="help"></Dropdown>
+    <Dropdown :usrname="usrname" v-on:quit="quit"></Dropdown>
   </el-header>
 </template>
 
@@ -17,27 +17,21 @@ export default {
   name: 'Header',
   components: {Dropdown, Breadcrumb, ShowMenu},
   props: {
-    'newList': Array
-  },
-  data () {
-    return {
-      menuList: [ 'Student' ]
-    }
+    usrname: '',
+    menuList: Array
   },
   methods: {
     collapseMenu (data) {
       this.$emit('collapseMenu', data)
     },
-    help () {
-      this.$emit('help')
-    },
     quit () {
+      console.log(1)
       this.$emit('quit')
     }
   },
   watch: {
-    newList (list) {
-      this.menuList = list
+    menuList (para) {
+      this.menuList = para
     }
   }
 }

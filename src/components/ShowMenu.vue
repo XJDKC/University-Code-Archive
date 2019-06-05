@@ -19,7 +19,7 @@ export default {
   name: 'ShowMenu',
   data () {
     return {
-      isCollapse: false
+      isCollapse: true
     }
   },
   methods: {

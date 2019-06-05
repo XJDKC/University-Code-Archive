@@ -53,9 +53,9 @@ export default {
                 Usrname: res.data.Usrname
               }
               switch (res.data.Usrtype) {
-                case 0: router.push({name: 'manager', paras}); console.log(0); break
-                case 1: router.push({name: 'teacher', paras}); console.log(1); break
-                case 2: router.push({name: 'student', paras}); console.log(2); break
+                case 0: router.push({name: 'manager', params: paras}); console.log(0); break
+                case 1: router.push({name: 'teacher', params: paras}); console.log(1); break
+                case 2: router.push({name: 'student', params: paras}); console.log(2); break
               }
             } else {
               this.$alert('登录失败', '', {

@@ -1,14 +1,6 @@
 <template>
   <el-container style="height: 100%">
-    <el-menu
-      @select="changeMenuList"
-      height="100%"
-      class="el-menu-vertical-demo"
-      text-color="#fff"
-      background-color="#304156"
-      active-text-color="#409eff"
-      :collapse="isCollapse"
-    >
+    <el-menu @select="changeMenuList" class="el-menu-vertical-demo" text-color="#fff" active-text-color="#409eff" background-color="#304156" :collapse="isCollapse">
       <el-submenu v-for="(first, i) in menuName" :key="i" :index="`${i+1}`">
         <template slot="title">
           <i :class="first.icon"></i>
@@ -20,7 +12,7 @@
       </el-submenu>
     </el-menu>
     <el-container>
-      <Header :newList="menuList" v-on:collapseMenu="collapseMenu" v-on:help="help" v-on:quit="quit"></Header>
+      <Header :menuList="menuList" :usrname="usrname" v-on:collapseMenu="collapseMenu" v-on:quit="quit"></Header>
       <QueryUsers         v-if="showMenuNo === '1-1'"></QueryUsers>
       <QueryTeachers      v-if="showMenuNo === '1-2'"></QueryTeachers>
       <QueryStudents      v-if="showMenuNo === '1-3'"></QueryStudents>
@@ -64,7 +56,7 @@ export default {
         { submenu: '课程课堂管理', icon: 'el-icon-location', childs: ['课程信息管理', '课堂信息管理'] },
         { submenu: '任务成绩管理', icon: 'el-icon-location', childs: ['课堂任务管理', '成绩信息管理'] }
       ],
-      Usrname: 'M201610282',
+      usrname: '',
       isCollapse: true,
       showMenuNo: '1-1',
       menuList: ['Manager']
@@ -74,14 +66,10 @@ export default {
     collapseMenu (data) {
       this.isCollapse = data
     },
-    help () {
-      this.$emit('help')
-    },
     quit () {
-      this.$emit('quit')
+      this.$router.push({name: 'login'})
     },
     changeMenuList (key, keyPath) {
-      console.log(this.$route.params)
       this.showMenuNo = key
       var temp = this.menuName
       var keys = key.split('-')
@@ -95,12 +83,10 @@ export default {
           this.menuList.push(temp[keys[i] - 1])
         }
       }
-    },
-    mounted () {
-      this.Usrname = this.$route.params.Usrname
-      console.log(this.$route.params)
-      console.log(this.Usrname)
     }
+  },
+  created: function () {
+    this.usrname = this.$route.params.Usrname
   }
 }
 </script>
@@ -111,6 +97,7 @@ export default {
   }
   .el-menu{
     color: #fff;
+    height: 100%;
     overflow-x: hidden;
     overflow-y: auto;
     background-color: #304156;
