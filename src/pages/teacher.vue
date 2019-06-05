@@ -22,13 +22,12 @@
 
 <script>
 import Header from '@/components/Header'
-import test from '@/components/test'
 import QueryClassByTeacher from '../components/QueryClassByTeacher'
 import ModifyTaskWeight from '../components/ModifyTaskWeight'
 
 export default {
   name: 'teacher',
-  components: {ModifyTaskWeight, QueryClassByTeacher, Header, test},
+  components: {ModifyTaskWeight, QueryClassByTeacher, Header},
   data () {
     return {
       menuName: [
@@ -36,9 +35,9 @@ export default {
         { submenu: '成绩管理', icon: 'el-icon-menu', childs: ['成绩录入', '成绩查询'] }
       ],
       usrname: '',
+      showMenuNo: '0',
       isCollapse: true,
-      showMenuNo: '1-1',
-      menuList: ['Teacher']
+      menuList: [ 'Teacher' ]
     }
   },
   methods: {

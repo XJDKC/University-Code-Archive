@@ -16,7 +16,7 @@
     <el-dialog title="课程信息" :visible.sync="dialogFormVisible">
       <el-form :model="course">
         <el-form-item label="课程编号:" >
-          <el-input v-model="course.CID" :disabled="modifyState>0"></el-input>
+          <el-input v-model.number="course.CID" :disabled="modifyState>0"></el-input>
         </el-form-item>
         <el-form-item label="课程姓名" >
           <el-input v-model="course.CName"></el-input>
@@ -25,13 +25,10 @@
           <el-input v-model="course.CCredit"></el-input>
         </el-form-item>
         <el-form-item label="开设学期:">
-          <el-date-picker
-            v-model="course.CTerm"
-            placeholder="选择学期"
-            format="yyyy 年 MM 月"
-            value-format="yyyyMM"
-            type="date">
-          </el-date-picker>
+          <el-radio-group  v-model="course.CTerm">
+            <el-radio :label="0">春季学期</el-radio>
+            <el-radio :label="1">秋季学期</el-radio>
+          </el-radio-group>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -61,7 +58,7 @@ export default {
         CID: 0,
         CName: '',
         CCredit: 0.0,
-        CTerm: ''
+        CTerm: Boolean
       }
     }
   },
@@ -71,6 +68,7 @@ export default {
         .then(res => { console.log(res.data); this.queryInfo = res.data })
     },
     insertCourse () {
+      this.course.CCredit = parseFloat(this.course.CCredit)
       axios.post(this.path + this.insertApi, this.course)
         .then(res => {
           if (res.data['State']) {
@@ -83,7 +81,6 @@ export default {
     },
     updateCourse () {
       this.dialogFormVisible = false
-      console.log(this.course)
       this.course.CCredit = parseFloat(this.course.CCredit)
       axios.post(this.path + this.updateApi, this.course)
         .then(res => {
@@ -117,11 +114,7 @@ export default {
       console.log(this.course)
     },
     TransType (row, column) {
-      if (parseInt(row.CTerm.substring(4, 2)) <= 6) {
-        return row.CTerm.substring(0, 4) + '年春季学期'
-      } else {
-        return row.CTerm.substring(0, 4) + '年秋季学期'
-      }
+      return row.CTerm ? '秋季学期' : '春季学期'
     }
   },
   created () {

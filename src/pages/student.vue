@@ -13,7 +13,6 @@
     </el-menu>
     <el-container>
       <Header :menuList="menuList" :usrname="usrname" v-on:collapseMenu="collapseMenu" v-on:quit="quit"></Header>
-      <test v-if="showMenuNo === '1-1'"></test>
       <el-footer></el-footer>
     </el-container>
   </el-container>
@@ -22,11 +21,10 @@
 <script>
 // import '@/styles/index.scss'
 import Header from '@/components/Header'
-import test from '@/components/test'
 
 export default {
   name: 'student',
-  components: {Header, test},
+  components: {Header},
   data () {
     return {
       menuName: [
@@ -34,9 +32,9 @@ export default {
         { submenu: '课堂查询', icon: 'el-icon-menu', childs: ['查询所选课堂'] }
       ],
       usrname: '',
-      menuList: [ 'Student' ],
+      showMenuNo: '0',
       isCollapse: true,
-      showMenuNo: '0'
+      menuList: [ 'Student' ]
     }
   },
   methods: {

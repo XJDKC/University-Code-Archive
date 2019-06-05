@@ -53,13 +53,13 @@ export default {
         { submenu: '信息查询', icon: 'el-icon-location', childs: ['账号信息查询', '教师信息查询', '学生信息查询', '课程信息查询', '课堂信息查询'] },
         { submenu: '账号信息管理', icon: 'el-icon-menu', childs: ['添加账号信息', '更新删除账号'] },
         { submenu: '个体信息管理', icon: 'el-icon-location', childs: ['教师信息管理', '学生信息管理'] },
-        { submenu: '课程课堂管理', icon: 'el-icon-location', childs: ['课程信息管理', '课堂信息管理'] },
-        { submenu: '任务成绩管理', icon: 'el-icon-location', childs: ['课堂任务管理', '成绩信息管理'] }
+        { submenu: '课程课堂管理', icon: 'el-icon-location', childs: ['课程信息管理', '课堂信息管理'] }
+        // ,{ submenu: '任务成绩管理', icon: 'el-icon-location', childs: ['课堂任务管理', '成绩信息管理'] }
       ],
       usrname: '',
+      showMenuNo: '0',
       isCollapse: true,
-      showMenuNo: '1-1',
-      menuList: ['Manager']
+      menuList: [ 'Manager' ]
     }
   },
   methods: {

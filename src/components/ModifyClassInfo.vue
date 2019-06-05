@@ -17,10 +17,10 @@
     <el-dialog title="课堂信息" :visible.sync="dialogFormVisible" style="padding: -1px">
       <el-form :model="classes">
         <el-form-item label="课堂编号:" >
-          <el-input v-model="classes.ClassID" :disabled="modifyState>0"></el-input>
+          <el-input v-model.number="classes.ClassID" :disabled="modifyState"></el-input>
         </el-form-item>
         <el-form-item label="课程编号" >
-          <el-input v-model="classes.CID"></el-input>
+          <el-input v-model.number="classes.CID"></el-input>
         </el-form-item>
         <el-form-item label="课堂名称" >
           <el-input v-model="classes.CName" disabled="true"></el-input>
@@ -71,7 +71,6 @@ export default {
     },
     insertClass () {
       console.log(this.classes)
-      this.classes.CID = parseInt(this.classes.CID)
       axios.post(this.path + this.insertApi, this.classes)
         .then(res => {
           if (res.data['State']) {
@@ -84,7 +83,6 @@ export default {
     },
     updateClass () {
       this.dialogFormVisible = false
-      this.classes.CID = parseInt(this.classes.CID)
       axios.post(this.path + this.updateApi, this.classes)
         .then(res => {
           if (res.data['State']) {
