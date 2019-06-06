@@ -21,9 +21,10 @@
     <el-table :data="queryInfo" style="width: 100%">
       <el-table-column align="left" prop="TaskID" label="任务编号"></el-table-column>
       <el-table-column align="center" prop="TaskName" label="任务名称"></el-table-column>
+      <el-table-column align="center" prop="Weight" label="任务权重"></el-table-column>
       <el-table-column align="center" prop="SID" label="学生编号"></el-table-column>
       <el-table-column align="center" prop="SName" label="学生名称"></el-table-column>
-      <el-table-column align="center" prop="Score" label="学生分数"></el-table-column>
+      <el-table-column align="center" prop="Score" label="学生分数" :formatter="TransType"></el-table-column>
       <el-table-column align="center" label="操作">
         <template slot-scope="scope">
           <el-button size="mini" type="danger" @click="updateScore(scope.$index, scope.row)">修改</el-button>
@@ -125,6 +126,10 @@ export default {
         this.mode = 0
       }
       this.dialogFormVisible = true
+    },
+    TransType (row, column) {
+      console.log(row.Score)
+      return row.Score === null ? '未录入' : row.Score
     }
   },
   created: function () {
