@@ -93,6 +93,7 @@ export default {
       axios.post(this.path + this.insertApi, {TID: this.usrname, SID: this.SID, TaskID: this.taskID, Score: this.newScore})
         .then(res => {
           if (res.data['State']) {
+            this.refresh()
             this.$message({message: '录入成功', type: 'success'})
           } else {
             this.$message.error('录入失败')
@@ -105,6 +106,7 @@ export default {
       axios.post(this.path + this.upateApi, {TID: this.usrname, SID: this.SID, TaskID: this.taskID, Score: this.newScore})
         .then(res => {
           if (res.data['State']) {
+            this.refresh()
             this.$message({message: '修改成功', type: 'success'})
           } else {
             console.log(res['State'])

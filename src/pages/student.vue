@@ -13,6 +13,9 @@
     </el-menu>
     <el-container>
       <Header :menuList="menuList" :usrname="usrname" v-on:collapseMenu="collapseMenu" v-on:quit="quit"></Header>
+      <QueryCoursesScore      :usrname="usrname" v-if="showMenuNo === '1-1'"></QueryCoursesScore>
+      <QuerySingleCourseScore :usrname="usrname" v-if="showMenuNo === '1-2'"></QuerySingleCourseScore>
+      <QueryClassByStudent    :usrname="usrname" v-if="showMenuNo === '2-1'"></QueryClassByStudent>
       <el-footer></el-footer>
     </el-container>
   </el-container>
@@ -21,10 +24,13 @@
 <script>
 // import '@/styles/index.scss'
 import Header from '@/components/Header'
+import QueryCoursesScore from '@/components/QueryCoursesScore'
+import QuerySingleCourseScore from '@/components/QuerySingleCourseScore'
+import QueryClassByStudent from '@/components/QueryClassByStudent'
 
 export default {
   name: 'student',
-  components: {Header},
+  components: {QueryClassByStudent, QuerySingleCourseScore, QueryCoursesScore, Header},
   data () {
     return {
       menuName: [
