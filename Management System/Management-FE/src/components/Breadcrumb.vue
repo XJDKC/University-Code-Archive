@@ -13,17 +13,12 @@
 export default {
   name: 'Breadcrumb',
   props: {
-    'newList': Array
-  },
-  data () {
-    return {
-      menuList: this.newList
-    }
+    menuList: Array
   },
   watch: {
-    newList (newList) {
+    menuList (para) {
       // console.log(newList)
-      this.menuList = newList
+      this.menuList = para
     }
   }
 }

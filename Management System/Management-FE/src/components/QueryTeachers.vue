@@ -18,7 +18,7 @@ export default {
   data () {
     return {
       path: 'http://localhost:5000',
-      api: '/QeuryTeachers',
+      api: '/QueryTeachers',
       queryInfo: []
     }
   },

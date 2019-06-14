@@ -19,7 +19,7 @@ export default {
   name: 'ShowMenu',
   data () {
     return {
-      isCollapse: false
+      isCollapse: true
     }
   },
   methods: {
@@ -39,8 +39,9 @@ export default {
     width: 25px;
     height: 50px;
     float: left;
+    transform: rotate(180deg);
   }
   .ShowMenu.is-active {
-    transform: rotate(180deg);
+    transform: rotate(0deg);
   }
 </style>
