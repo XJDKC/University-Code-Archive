@@ -27,17 +27,17 @@ export default new Router({
       component: login
     },
     {
-      path: '/manager',
+      path: '/manager/:Usrname',
       name: 'manager',
       component: manager
     },
     {
-      path: '/teacher',
+      path: '/teacher/:Usrname',
       name: 'teacher',
       component: teacher
     },
     {
-      path: '/student',
+      path: '/student/:Usrname',
       name: 'student',
       component: student
     }
