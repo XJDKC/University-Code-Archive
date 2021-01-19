@@ -105,7 +105,9 @@ University-Code-Archive is a repository to record all code written during colleg
             </a>
         </td>
         <td colspan="2" align="center">Five-stage MIPS rocessor</td>
-        <td>Designed and implemented a five-stage(i.e. IF, ID, EX, MEM, WB) MIPS processor with FPGA with three teammates, supporting Operand Forwarding, Dynamic Branch Prediction and Multi-level Interruption. </td>
+        <td>Led four teammates to design and implement a five-stage(i.e. IF, ID, EX, MEM, WB) MIPS processor with FPGA, supporting Operand Forwarding, Dynamic Branch Prediction and Multi-level Interruption. 
+            <a href="https://github.com/VinStarry/MIPS_pipeline_CPU">Group Project Homepage</a>
+        </td>
     </tr>
 </table>
 
@@ -126,7 +128,7 @@ University-Code-Archive is a repository to record all code written during colleg
 |      [Java Programming Language][15]      | 2 labs: Queue, Registration Management System implemented by JavaFX |
 |         [Interface Technique][16]         |      4 labs and a final design for Interface Technique       |
 |    [Algorithm Design and Analysis][17]    | 2 labs, implemented some algorithms learned from the course  |
-|   [Introduction to Database System][18]   | 1 lab and a final design(a score management system with separated front and back ends) |
+|   [Introduction to Database System][18]   | 1 lab and a final design(a score management system with separated front and back ends). [Demo][25] |
 |        [Computer Architecture][19]        |                      1 lab: CSAPP Cache Lab                  |
 |       [Principles of Compiler][20]        |  Standford CS143: Implemented a compiler for Decaf language  |
 
@@ -170,3 +172,6 @@ University-Code-Archive is a repository to record all code written during colleg
 [22]: https://github.com/XJDKC/University-Code-Archive/tree/master/Other%20Personal%20Projects/Crack
 [23]: https://github.com/XJDKC/University-Code-Archive/tree/master/Other%20Personal%20Projects/MIF
 [24]: https://github.com/XJDKC/University-Code-Archive/tree/master/Other%20Personal%20Projects/Real-Time%20Rendering
+
+<!--- Other links -->
+[25]: https://xjdkc.github.io/University-Code-Archive/
