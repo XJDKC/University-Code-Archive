@@ -71,7 +71,7 @@ University-Code-Archive is a repository to record all code written during colleg
             </a>
         </td>
         <td colspan="2" nowrap="nowrap" align="center">Big Data Analytics</td>
-        <td>Performed big data analytics on the Douban movie review.  <br> Environment: CentOS, Hadoop, HBase, MySQL, Scrapy.  <br> Workflow: Data from Douban --python--> MySQL Database --Map Reduce--> HDFS --Map Reduce--> HBase --Map Reduce--> Analytics</td>
+        <td>Performed big data analytics on Douban movie reviews.  <br> Environment: CentOS, Hadoop, HBase, MySQL, Scrapy.  <br> Workflow: Data from Douban --python--> MySQL Database --Map Reduce--> HDFS --Map Reduce--> HBase --Map Reduce--> Analytics</td>
     </tr>
     <tr>
         <td rowspan="5" nowrap="nowrap" align="center">
@@ -111,7 +111,7 @@ University-Code-Archive is a repository to record all code written during colleg
 
 ### Course Experiment
 
-|             Course Name                   |                         Description                          |
+|                Course Name                |                         Description                          |
 | :---------------------------------------: | :----------------------------------------------------------: |
 |       [C Programming Language][5]         |              8 labs for  C Programming Language              |
 |    [Assembly Programming Language][6]     |           5 labs for Assembly Programming Language           |
@@ -133,8 +133,13 @@ University-Code-Archive is a repository to record all code written during colleg
 
 
 ### Other Personal Projects
-
-Updating
+|       Project Name        |                         Description                          |
+| :-----------------------: | :----------------------------------------------------------: |
+|     [Chess Game][21]      |        A simple chess game with AI implemented by MFC        |
+|        [Crack][22]        |                  A small tool for cracking                   |
+|         [MIF][23]         | A program for parsing files in MIF(MapInfo) format <br/> and drawing the convex hull of the coordinates contained in them. |
+| [Real-Time Rendering][24] |      A real-time rendering program implemented by glut.      |
+|      To be continued      |                            ...                               |
 
 <!--- Reference links for Algorithm -->
 [1]: https://github.com/XJDKC/University-Code-Archive/tree/master/Algorithm/ACM
@@ -159,3 +164,9 @@ Updating
 [18]: https://github.com/XJDKC/University-Code-Archive/tree/master/Course%20Experiment/Introduction%20to%20Database%20System%20Course%20Exp
 [19]: https://github.com/XJDKC/University-Code-Archive/tree/master/Course%20Experiment/Computer%20Architecture%20Course%20Exp
 [20]: https://github.com/XJDKC/University-Code-Archive/tree/master/Course%20Experiment/Principle%20of%20Compiler
+
+<!--- Reference links for other personal projects -->
+[21]: https://github.com/XJDKC/University-Code-Archive/tree/master/Other%20Personal%20Projects/Chess%20Game
+[22]: https://github.com/XJDKC/University-Code-Archive/tree/master/Other%20Personal%20Projects/Crack
+[23]: https://github.com/XJDKC/University-Code-Archive/tree/master/Other%20Personal%20Projects/MIF
+[24]: https://github.com/XJDKC/University-Code-Archive/tree/master/Other%20Personal%20Projects/Real-Time%20Rendering
