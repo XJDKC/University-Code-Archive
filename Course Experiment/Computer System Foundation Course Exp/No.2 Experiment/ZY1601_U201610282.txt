@@ -1,7 +1,0 @@
-When I get angry, Mr. Bigglesworth gets upset.
-0 1 1 2 3 5
-0 a 635
-6 21 DrEvil
-ionefg
-3 2 4 6 1 5
-22
