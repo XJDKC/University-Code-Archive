@@ -234,12 +234,12 @@ int rotateLeft(int x, int n) {
  *   Rating: 4
  */
 int parityCheck(int x) {
-	int y=x^(x<<16);
-	y=y^(y<<8);
-	y=y^(y<<4);
-	y=y^(y<<2);
-	y=y^(y<<1);
-  	return (y>>31)&1;
+	x^=x>>16;
+	x^=x>>8;
+	x^=x>>4;
+	x^=x>>2;
+	x^=x>>1;
+  	return x&1;
 }
 /*
  * mul2OK - Determine if can compute 2*x without overflow
@@ -251,7 +251,7 @@ int parityCheck(int x) {
  *   Rating: 2
  */
 int mul2OK(int x) {
- 	return !((((x<<1)>>31)&1)^((x>>31)&1));
+ 	return ((((x<<1)^x)>>31)&1) ^ 1;
 }
 /*
  * mult3div2 - multiplies by 3/2 rounding toward 0,
@@ -265,8 +265,8 @@ int mul2OK(int x) {
  *   Rating: 2
  */
 int mult3div2(int x) {
-  x=(x<<1)+x;
-	return (x>>1)+(((x>>31)&1)&(x&1))  ;
+	x=(x<<1)+x;
+	return (x+ ((x>>31)&1) )>>1;
 }
 /* 
  * subOK - Determine if can compute x-y without overflow
@@ -277,7 +277,8 @@ int mult3div2(int x) {
  *   Rating: 3
  */
 int subOK(int x, int y) {
-  return 2;
+	int z=x+(~y)+1;
+ 	return !( (( (x&~y&~z)|(~x&y&z) )>>31)&1 ) | !(x^y);
 }
 /* 
  * absVal - absolute value of x
@@ -288,8 +289,7 @@ int subOK(int x, int y) {
  *   Rating: 4
  */
 int absVal(int x) {
-  int y=(x>>31)&1;
-  return (~y&x)|(y&);
+	return (x^(x>>31))+((x>>31)&1);
 }
 /* 
  * float_abs - Return bit-level equivalent of absolute value of f for
@@ -303,7 +303,10 @@ int absVal(int x) {
  *   Rating: 2
  */
 unsigned float_abs(unsigned uf) {
-  return 2;
+  if ((!((uf<<1>>24)^255))&&uf<<9)
+ 	return uf;
+  else 
+  	return (uf^(uf>>31<<31));
 }
 /* 
  * float_f2i - Return bit-level equivalent of expression (int) f
@@ -318,5 +321,23 @@ unsigned float_abs(unsigned uf) {
  *   Rating: 4
  */
 int float_f2i(unsigned uf) {
-  return 2;
+	int ans=(uf&~(~0>>23))|1<<23,e=uf<<1>>24;
+	if (e<127) return 0;
+	if (e>157) return 1<<31;
+	if (e==0) 
+	{
+		if (uf>>31)
+			return ~0;
+		else 
+			return 1;
+	}
+	e=e+~150+1;
+	if (e>>31)
+		ans=ans>>(~e+1);
+	else 
+		ans=ans<<e;
+	if (uf>>31) 
+		ans=~ans+1;
+	return ans;
+
 }
