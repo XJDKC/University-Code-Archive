@@ -143,6 +143,9 @@ University-Code-Archive is a repository to record all code written during colleg
 | [Real-Time Rendering][24] |      A real-time rendering program implemented by glut.      |
 |      To be continued      |                            ...                               |
 
+## Note
+My graduation project is about optimizing [Apache SINGA][26]. Please contact me personally if you are interested in my paper and would like any further information about it.
+
 <!--- Reference links for Algorithm -->
 [1]: https://github.com/XJDKC/University-Code-Archive/tree/master/Algorithm/ACM
 [2]: https://github.com/XJDKC/University-Code-Archive/tree/master/Algorithm/CCF%20CSP
@@ -175,3 +178,4 @@ University-Code-Archive is a repository to record all code written during colleg
 
 <!--- Other links -->
 [25]: https://xjdkc.github.io/University-Code-Archive/
+[26]: https://github.com/apache/singa
